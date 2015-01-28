@@ -1,0 +1,13 @@
+.main {
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 0;
+}
+
+#main_list {
+	overflow-y: scroll;
+	width: 500;
+}
+
+
