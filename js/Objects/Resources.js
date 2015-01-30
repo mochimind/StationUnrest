@@ -1,17 +1,19 @@
 Station.Resources = {};
 
-Station.Resources.defaultResources = [0,0,0,0,0];
+Station.Resources.defaultResources = function() {
+	return [0,0,0,0,0];
+};
 Station.Resources.bundle = function() {
-	this.resources = Station.Resources.defaultResources;
+	this.resources = Station.Resources.defaultResources();
 };
 
 Station.Resources.clearBundle = function(_bundle) {
-	_bundle.resources = Station.Resources.defaultResources;
+	_bundle.resources = Station.Resources.defaultResources();
 };
 
 Station.Resources.adjustResource = function(_target, _type, _amount, _add) {
 	if (_add) {
-		_target.resources[_type] += _amount;		
+		_target.resources[_type] += _amount;
 	} else {
 		_target.resources[_type] -= _amount;				
 	}

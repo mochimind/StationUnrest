@@ -4,13 +4,20 @@ Station.Game.init = function() {
 	var _addShip = new Station.Ship.ship("Enterprise");
 	Station.ShipMgr.addShip(_addShip);
 	
-	var _addMods = [];
-	_addMods.push([Station.Modules.PowerStation.id, 1]);
-	_addMods.push([Station.Modules.CrewBarracks.id, 1]);
-	_addMods.push([Station.Modules.OrganicsProcessor.id, 1]);
-	_addMods.push([Station.Modules.Refinery.id, 1]);
+	var _addObj = [];
+	_addObj.push([Station.Modules.PowerStation.id, 1]);
+	_addObj.push([Station.Modules.CrewBarracks.id, 1]);
+	_addObj.push([Station.Modules.OrganicsProcessor.id, 1]);
+	_addObj.push([Station.Modules.Refinery.id, 1]);
+	Station.Modules.adjustModules(_addShip.modules, _addObj);
 	
-	Station.Modules.adjustModules(_addShip.modules, _addMods);
+	_addObj = new Station.Resources.bundle();
+	Station.Resources.adjustResource(_addObj, Station.Resources.Power.id, 100, true);
+	Station.Resources.adjustResource(_addObj, Station.Resources.Polymer.id, 101, true);
+	Station.Resources.adjustResource(_addObj, Station.Resources.Fuel.id, 102, true);
+	Station.Resources.adjustResource(_addObj, Station.Resources.Housing.id, 103, true);
+	Station.Resources.adjustResource(_addObj, Station.Resources.Gas.id, 104, true);
+	Station.ResourceMgr.adjustResources(_addShip.resourceMgr, _addObj, true);
 };
 
 Station.Game.processRound = function() {
