@@ -30,7 +30,7 @@ Station.ResourceMgr.canAddResources = function(_resourceMgr, _source) {
 };
 
 Station.ResourceMgr.canRemoveResources = function(_resourceMgr, _source) {
-	for (var i=0 ; i<source.resources.length ; i++) {
+	for (var i=0 ; i<_source.resources.length ; i++) {
 		if (_resourceMgr.available.resources[i] - _source.resources[i] < 0) {
 			return false;
 		}

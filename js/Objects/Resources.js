@@ -27,7 +27,14 @@ Station.Resources.resourceBundleFromArray = function(_data) {
 	return _outBundle;
 };
 
-
+Station.Resources.Multiply = function(_bundle, _count) {
+	var _outVar = new Station.Resources.bundle();
+	for (var i=0 ; i<_bundle.resources.length ; i++) {
+		_outVar.resources[i] = _bundle.resources[i] * _count;
+	}
+	
+	return _outVar
+};
 
 Station.Resources.clearBundle = function(_bundle) {
 	_bundle.resources = Station.Resources.defaultResources();

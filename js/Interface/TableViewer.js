@@ -11,8 +11,6 @@ Station.TableViewer.initDisplay = function(_data) {
 	document.body.appendChild(Station.TableViewer.tableDiv);
 	
 	Station.TableViewer.createHeader(_data);
-	
-	Station.Interface.loadView(Station.TableViewer.tableDiv);
 };
 
 Station.TableViewer.createHeader = function(_data) {
@@ -50,8 +48,13 @@ Station.TableViewer.createEntry = function(_data) {
 	return _outObjs;
 };
 
+Station.TableViewer.modifyEntry = function(_entry, _index, _value) {
+	// it's index + 1 because the first entry is the tr
+	_entry[_index+1].innerHTML = _value;
+};
+
 // tear down the display once we are done
-Station.TableViewer.destroyDisplay = function() {
+Station.TableViewer.unloadView = function() {
 	document.body.removeChild(Station.TableViewer.tableDiv);
 	Station.TableViewer.tableDiv = null;
 	Station.TableViewer.columns = 0;

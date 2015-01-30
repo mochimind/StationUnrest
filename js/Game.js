@@ -22,4 +22,5 @@ Station.Game.init = function() {
 
 Station.Game.processRound = function() {
 	console.log('hit');
+	Station.Interface.updateInterface();
 };

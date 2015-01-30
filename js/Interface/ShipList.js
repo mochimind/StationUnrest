@@ -11,9 +11,17 @@ Station.ShipList.init = function() {
 			});			
 		}) (Station.ShipMgr.shipList[i]);
 	}
+	Station.Interface.loadView(Station.ShipList);
 };
 
 Station.ShipList.ShipClickedHandler = function(_curShip) {
 	Station.ShipView.init(_curShip);
 };
 
+Station.ShipList.updateView = function() {
+	
+};
+
+Station.ShipList.unloadView = function() {
+	Station.TableViewer.unloadView();
+};

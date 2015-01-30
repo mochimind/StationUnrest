@@ -6,7 +6,7 @@ Station.Interface.init = function () {
 
 Station.Interface.unloadView = function() {
 	if (Station.Interface.curView != null) {
-		document.body.removeChild(Station.Interface.curView);
+		Station.Interface.curView.unloadView();
 		Station.Interface.curView = null;
 	}
 };
@@ -14,4 +14,8 @@ Station.Interface.unloadView = function() {
 Station.Interface.loadView = function(_addObj) {
 	Station.Interface.unloadView();
 	Station.Interface.curView = _addObj;
+};
+
+Station.Interface.updateInterface = function() {
+	Station.Interface.curView.updateView();
 };
