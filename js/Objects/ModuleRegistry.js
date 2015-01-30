@@ -6,12 +6,13 @@ Station.Modules.modules = function() {
 	this.usedSpace = 0;
 };
 
+// slower, but scalable
 Station.Modules.getModulesCount = function(_module) {
-	console.log("modList is: " + _module.modCount);
-	return [[Station.Modules.PowerStation.name, _module.modCount[Station.Modules.PowerStation.id]],
-	        [Station.Modules.CrewBarracks.name, _module.modCount[Station.Modules.CrewBarracks.id]],
-	        [Station.Modules.OrganicsProcessor.name, _module.modCount[Station.Modules.OrganicsProcessor.id]],
-	        [Station.Modules.Refinery.name, _module.modCount[Station.Modules.Refinery.id]]];	
+	var _outArr = [];
+	for (var i=0 ; i<_module.modCount.length ; i++) {
+		_outArr.push([Station.Modules.getModuleFromID(i).name, _module.modCount[i]]);
+	}
+	return _outArr;
 };
 
 // module is the module you want to change, _gifts is an array of modules you want to add to the ship

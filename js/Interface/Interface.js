@@ -6,7 +6,6 @@ Station.Interface.init = function () {
 
 Station.Interface.unloadView = function() {
 	if (Station.Interface.curView != null) {
-		console.log("cur view: " + Station.Interface.curView);
 		document.body.removeChild(Station.Interface.curView);
 		Station.Interface.curView = null;
 	}

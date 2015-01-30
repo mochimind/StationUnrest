@@ -10,5 +10,7 @@ window.onload = function() {
 	Station.Game.init();
 	
 	Station.Interface.init();
+	
+	window.setInterval(Station.Game.processRound, 1000);
 };
 
