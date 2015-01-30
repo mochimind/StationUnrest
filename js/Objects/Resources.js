@@ -1,11 +1,33 @@
 Station.Resources = {};
 
 Station.Resources.defaultResources = function() {
-	return [0,0,0,0,0];
+	return [0,0,0,0,0,0];
 };
+
+Station.Resources.init = function() {
+	Station.Resources.Collection = Station.Resources.defaultResources;
+	Station.Resources.Collection[Station.Resources.Power.id] = Station.Resources.Power;
+	Station.Resources.Collection[Station.Resources.Polymer.id] = Station.Resources.Polymer;
+	Station.Resources.Collection[Station.Resources.Fuel.id] = Station.Resources.Fuel;
+	Station.Resources.Collection[Station.Resources.Housing.id] = Station.Resources.Housing;
+	Station.Resources.Collection[Station.Resources.Gas.id] = Station.Resources.Gas;
+	Station.Resources.Collection[Station.Resources.Effort.id] = Station.Resources.Effort;
+};
+
 Station.Resources.bundle = function() {
 	this.resources = Station.Resources.defaultResources();
 };
+
+Station.Resources.resourceBundleFromArray = function(_data) {
+	var _outBundle = new Station.Resources.bundle();
+	
+	for (var i=0 ; i<_data.length ; i++) {
+		_outBundle.resources[_data[i][0]] += _data[i][1];
+	}
+	return _outBundle;
+};
+
+
 
 Station.Resources.clearBundle = function(_bundle) {
 	_bundle.resources = Station.Resources.defaultResources();
@@ -30,18 +52,7 @@ Station.Resources.adjustResourceBundle = function(_target, _source, _add) {
 };
 
 Station.Resources.getModuleFromID = function(_id) {
-	switch(_id) {
-	case Station.Resources.Power.id:
-		return Station.Resources.Power;
-	case Station.Resources.Polymer.id:
-		return Station.Resources.Polymer;
-	case Station.Resources.Fuel.id:
-		return Station.Resources.Fuel;
-	case Station.Resources.Housing.id:
-		return Station.Resources.Housing;
-	case Station.Resources.Gas.id:
-		return Station.Resources.Gas;
-	}
+	return Station.Resources.Collection[_id];
 };
 
 // this is inefficient, but is scalable when more resources are added
@@ -78,3 +89,8 @@ Station.Resources.Gas = {
 		name: 'gas',
 		accumulate: true
 };
+Station.Resources.Effort = {
+		id: 5,
+		name: 'effort',
+		accumulate: false
+}

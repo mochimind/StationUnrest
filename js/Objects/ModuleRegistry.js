@@ -1,18 +1,21 @@
 Station.Modules = {};
 
+Station.Modules.defaultModules = function() {
+	return [0,0,0,0];
+};
+
 Station.Modules.modules = function() {
-	this.modCount = [0,0,0,0];
+	this.modCount = Station.Modules.defaultModules();
 	this.availableSpace = 100;
 	this.usedSpace = 0;
 };
 
-// slower, but scalable
-Station.Modules.getModulesCount = function(_module) {
-	var _outArr = [];
-	for (var i=0 ; i<_module.modCount.length ; i++) {
-		_outArr.push([Station.Modules.getModuleFromID(i).name, _module.modCount[i]]);
-	}
-	return _outArr;
+Station.Modules.init = function() {
+	Station.Modules.Collection = Station.Modules.defaultModules();
+	Station.Modules.Collection[Station.Modules.PowerStation.id] = Station.Modules.PowerStation;	
+	Station.Modules.Collection[Station.Modules.CrewBarracks.id] = Station.Modules.CrewBarracks;	
+	Station.Modules.Collection[Station.Modules.OrganicsProcessor.id] = Station.Modules.OrganicsProcessor;	
+	Station.Modules.Collection[Station.Modules.Refinery.id] = Station.Modules.Refinery;	
 };
 
 // module is the module you want to change, _gifts is an array of modules you want to add to the ship
@@ -26,17 +29,28 @@ Station.Modules.adjustModules = function(_module, _gifts) {
 	}
 };
 
-Station.Modules.getModuleFromID = function(_id) {
-	switch(_id) {
-	case Station.Modules.PowerStation.id:
-		return Station.Modules.PowerStation;
-	case Station.Modules.CrewBarracks.id:
-		return Station.Modules.CrewBarracks;
-	case Station.Modules.OrganicsProcessor.id:
-		return Station.Modules.OrganicsProcessor;
-	case Station.Modules.Refinery.id:
-		return Station.Modules.Refinery;
+Station.Modules.addModule = function(_ship, _module, _count) {
+	// check that there's enough space
+	if (_ship.modules.availableSpace < _count * Station.Modules.getModuleFromID(_modules).space) {
+		console.log("not enough space");
+		return false;
 	}
+	
+	// check that there's enough resources
+	if (!Station.ResourceMgr.canRemoveResources(_ship.resourceMgr, Station.Modules.getModuleFromID(_modules).buildCost)) {
+		
+	}
+};
+
+Station.Modules.removeModule = function(_moduleMgr, _modules, _count) {
+	// check that there's enough available
+	
+	// TODO: refund resources
+	console.log("removing");
+};
+
+Station.Modules.getModuleFromID = function(_id) {
+	return Station.Modules.Collection[_id];
 };
 
 Station.Modules.PowerStation = {

@@ -25,13 +25,13 @@ Station.ResourceMgr.adjustResources = function(_resourceMgr, _bundle, _add) {
 	Station.Resources.adjustResourceBundle(_resourceMgr.available, _bundle, _add);
 };
 
-Station.ResourceMgr.canAddResourceBundle = function(_target, _source) {
+Station.ResourceMgr.canAddResources = function(_resourceMgr, _source) {
 	return true;
 };
 
-Station.ResourceMgr.canRemoveResourceBundle = function(_target, _source) {
+Station.ResourceMgr.canRemoveResources = function(_resourceMgr, _source) {
 	for (var i=0 ; i<source.resources.length ; i++) {
-		if (_target.resources[i] - _source.resources[i] < 0) {
+		if (_resourceMgr.available.resources[i] - _source.resources[i] < 0) {
 			return false;
 		}
 	}

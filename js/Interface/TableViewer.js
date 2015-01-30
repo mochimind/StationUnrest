@@ -16,14 +16,18 @@ Station.TableViewer.initDisplay = function(_data) {
 };
 
 Station.TableViewer.createHeader = function(_data) {
+	var _outObjs = [];
 	var _tempRow = document.createElement('tr');
+	_outObjs.push(_tempRow);
 	for (var i=0 ; i<_data.length ; i++) {
 		var _tempCol = document.createElement('th');
 		_tempCol.innerHTML = _data[i];
 		_tempRow.appendChild(_tempCol);
+		_outObjs.push(_tempCol);
 	}	
 	
 	Station.TableViewer.tableDiv.appendChild(_tempRow);
+	return _outObjs;
 };
 
 Station.TableViewer.createEntry = function(_data) {
@@ -32,15 +36,18 @@ Station.TableViewer.createEntry = function(_data) {
 	//	return Station.ERROR;
 	//}
 	
+	var _outObjs = [];
 	var _tempRow = document.createElement('tr');
+	_outObjs.push(_tempRow);
 	for (var i=0 ; i<_data.length ; i++) {
 		var _tempCol = document.createElement('td');
 		_tempCol.innerHTML = _data[i];
 		_tempRow.appendChild(_tempCol);
+		_outObjs.push(_tempCol);
 	}
 	Station.TableViewer.tableDiv.appendChild(_tempRow);
 	
-	return _tempRow;
+	return _outObjs;
 };
 
 // tear down the display once we are done
