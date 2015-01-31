@@ -12,10 +12,8 @@ Station.Game.init = function() {
 	Station.Modules.adjustModules(_addShip.modules, _addObj);
 	
 	_addObj = new Station.Resources.bundle();
-	Station.Resources.adjustResource(_addObj, Station.Resources.Power.id, 100, true);
 	Station.Resources.adjustResource(_addObj, Station.Resources.Polymer.id, 101, true);
 	Station.Resources.adjustResource(_addObj, Station.Resources.Fuel.id, 102, true);
-	Station.Resources.adjustResource(_addObj, Station.Resources.Housing.id, 103, true);
 	Station.Resources.adjustResource(_addObj, Station.Resources.Gas.id, 104, true);
 	Station.ResourceMgr.adjustResources(_addShip.resourceMgr, _addObj, true);
 };

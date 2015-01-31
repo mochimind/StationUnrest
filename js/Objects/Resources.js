@@ -1,17 +1,14 @@
 Station.Resources = {};
 
 Station.Resources.defaultResources = function() {
-	return [0,0,0,0,0,0];
+	return [0,0,0];
 };
 
 Station.Resources.init = function() {
 	Station.Resources.Collection = Station.Resources.defaultResources;
-	Station.Resources.Collection[Station.Resources.Power.id] = Station.Resources.Power;
 	Station.Resources.Collection[Station.Resources.Polymer.id] = Station.Resources.Polymer;
 	Station.Resources.Collection[Station.Resources.Fuel.id] = Station.Resources.Fuel;
-	Station.Resources.Collection[Station.Resources.Housing.id] = Station.Resources.Housing;
 	Station.Resources.Collection[Station.Resources.Gas.id] = Station.Resources.Gas;
-	Station.Resources.Collection[Station.Resources.Effort.id] = Station.Resources.Effort;
 };
 
 Station.Resources.bundle = function() {
@@ -72,32 +69,37 @@ Station.Resources.clearConstantResources = function(_bundle) {
 };
 
 Station.Resources.Power = {
-		id: 0,
+		id: 1001,
 		name: 'power',
 		accumulate: false
 };
 Station.Resources.Polymer = {
-		id: 1,
+		id: 0,
 		name: 'polymer',
 		accumulate: true
 };
 Station.Resources.Fuel = {
-		id: 2,
+		id: 1,
 		name: 'fuel',
 		accumulate: true
 };
 Station.Resources.Housing = {
-		id: 3,
+		id: 1002,
 		name: 'housing',
 		accumulate: false
 };
 Station.Resources.Gas = {
-		id: 4,
+		id: 2,
 		name: 'gas',
 		accumulate: true
 };
 Station.Resources.Effort = {
-		id: 5,
+		id: 1003,
 		name: 'effort',
 		accumulate: false
-}
+};
+Station.Resources.Food = {
+		id: 3,
+		name: 'food',
+		accumulate: true
+};

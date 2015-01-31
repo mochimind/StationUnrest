@@ -45,8 +45,19 @@ Station.Modules.addModule = function(_ship, _module, _count) {
 	_ship.resourceMgr.usedSpace += _tempMod.space * _count;
 	
 	// reward the modules
-	_ship.resourceMgr[_module] += _count;
+	_ship.modules.modCount[_module] += _count;
 	Station.Interface.updateInterface();
+	
+	// check for effects
+	if (_tempMod.effect != undefined) {
+		for (var i=0 ; i<_tempMod.effect.length ; i++) {
+			if (_tempMod.effect[i][0] == Station.Resources.Power.id) {
+				_ship.resourceMgr.powerAvailable += _tempMod.effect[i][1];
+			} else if (_tempMod.effects[i][0] == Station.Resources.Housing.id) {
+				_ship.resourceMgr.housingAvailable += _tempMod.effect[i][1];
+			}
+		}
+	}
 };
 
 Station.Modules.removeModule = function(_moduleMgr, _modules, _count) {
@@ -64,38 +75,53 @@ Station.Modules.init = function() {
 	Station.Modules.PowerStation = {
 			id: 0,
 			name: "Power Station",
-			buildCost: Station.Resources.resourceBundleFromArray([[Station.Resources.Polymer.id, 9]]),
+			buildCost: Station.Resources.resourceBundleFromArray([
+                              [Station.Resources.Polymer.id, 9]]),
 			effort: 8,
 			space: 1,
-			operatingCost: [['fuel', 1], ['labor', 1]],
-			produces: [['power', 4]],
+			labor: 1,
+			operatingCost: Station.Resources.resourceBundleFromArray([
+                              [Station.Resources.Fuel.id, 1]]),
+			effect: [[Station.Resources.Power.id, 4]],
 			description: "One of the first reactor designs popularized in the colonization age. Really the only thing good about this reactor is it's cheap and easy to make."
 	};
 
 	Station.Modules.CrewBarracks = {
 			id: 1,
 			name: "Crew Barracks",
-			buildCost: [['polymer', 32],['effort', 24]],
+			buildCost: Station.Resources.resourceBundleFromArray([
+                              [Station.Resources.Polymer.id, 32]]),
+            effort: 24,
 			space: 4,
-			operatingCost: [['power', 2]],		
-			produces: [['housing', 40]],
+			power: 2,
+			effect: [[Station.Resources.Housing.id, 40]],
 			description: ""
 	};
 	Station.Modules.OrganicsProcessor = {
 			id: 2,
 			name: "Organics Processor",
-			buildCost: [['polymer', 5], ['effort', 5]],
+			buildCost: Station.Resources.resourceBundleFromArray([
+                              [Station.Resources.Polymer.id, 5]]),
+            effort: 5,
 			space: 1,
-			operatingCost: [['labor', 1], ['power', 1]],		
-			produces: [['food', 6]]
+			labor: 1,
+			power: 1,
+			produces: Station.Resources.resourceBundleFromArray([
+                              [Station.Resources.Food.id, 6]])
 	};
 	Station.Modules.Refinery = {
 			id: 3,
 			name: "Refinery",
-			buildCost: [['polymer', 16], ['effort', 12]],
+			buildCost: Station.Resources.resourceBundleFromArray([
+                              [Station.Resources.Polymer.id, 16]]),
+			effort: 12,
 			space: 2,
-			operatingCost: [['power', 3], ['labor', 2], ['gas', 1]],
-			produces: [['fuel', 2]]
+			labor: 2,
+			power: 3,
+			operatingCost: Station.Resources.resourceBundleFromArray([
+                              [Station.Resources.Gas.id, 1]]),
+			produces: Station.Resources.resourceBundleFromArray([
+                              [Station.Resources.Fuel.id, 2]])
 			
 	};
 

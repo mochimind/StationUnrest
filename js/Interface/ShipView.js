@@ -6,8 +6,8 @@ Station.ShipView.init = function(_ship) {
 	Station.TableViewer.initDisplay(["Modules Built"]);
 
 	Station.ShipView.modules = [];
+	var _tempArray = [];
 	for (var i=0 ; i<_ship.modules.modCount.length ; i++) {
-		var _tempArray = [];
 		_tempArray.push(Station.Modules.getModuleFromID(i).name);
 		_tempArray.push(_ship.modules.modCount[i]);
 		_tempArray.push("+");
@@ -28,18 +28,24 @@ Station.ShipView.init = function(_ship) {
 	
 	Station.TableViewer.createHeader(["Resources Available"]);
 	Station.ShipView.resources = [];
-	_tempArray = Station.ResourceMgr.getResourceCount(_ship.resourceMgr);
 	for (var i=0 ; i<_ship.resourceMgr.available.resources.length ; i++) {
-		var _tempArray = [];
+		_tempArray = [];
 		_tempArray.push(Station.Resources.getModuleFromID(i).name);
 		_tempArray.push(_ship.resourceMgr.available.resources[i]);
 		Station.ShipView.resources.push(Station.TableViewer.createEntry(_tempArray));
 	}
 	
+	// power
+	_tempArray = [Station.resourceMgr.powerAvailable + "/" + Station.resourceMgr.power];
+	
 	Station.Interface.loadView(Station.ShipView);
 };
 
 Station.ShipView.updateView = function() {
+	for (var i=0 ; i<Station.ShipView.ship.modules.modCount.length ; i++) {
+		Station.TableViewer.modifyEntry(Station.ShipView.modules[i], 1, Station.ShipView.ship.modules.modCount[i]);
+	}
+	
 	for (var i=0 ; i<Station.ShipView.ship.resourceMgr.available.resources.length ; i++) {
 		Station.TableViewer.modifyEntry(Station.ShipView.resources[i], 1, Station.ShipView.ship.resourceMgr.available.resources[i]);
 	}

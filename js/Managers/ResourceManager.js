@@ -2,7 +2,10 @@ Station.ResourceMgr = {};
 
 Station.ResourceMgr.resourceMgr = function() {
 	this.available = new Station.Resources.bundle();
-	this.nextRound = new Station.Resources.bundle();
+	this.powerAvailable = 0;
+	this.powerUsed = 0;
+	this.housingAvailable = 0;
+	this.housingUsed = 0;
 };
 
 Station.ResourceMgr.processRound = function(_resourceMgr) {
