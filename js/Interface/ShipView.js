@@ -6,8 +6,9 @@ Station.ShipView.init = function(_ship) {
 	Station.TableViewer.initDisplay(["Modules Built"]);
 
 	Station.ShipView.modules = [];
-	var _tempArray = [];
+	var _tempArray;
 	for (var i=0 ; i<_ship.modules.modCount.length ; i++) {
+		_tempArray = [];
 		_tempArray.push(Station.Modules.getModuleFromID(i).name);
 		_tempArray.push(_ship.modules.modCount[i]);
 		_tempArray.push("+");
@@ -36,7 +37,16 @@ Station.ShipView.init = function(_ship) {
 	}
 	
 	// power
-	_tempArray = [Station.resourceMgr.powerAvailable + "/" + Station.resourceMgr.power];
+	_tempArray = [];
+	_tempArray.push(Station.Resources.Power.name);
+	_tempArray.push(_ship.resourceMgr.powerAvailable + "/" + (_ship.resourceMgr.powerUsed + _ship.resourceMgr.powerAvailable));
+	Station.ShipView.resources.push(Station.TableViewer.createEntry(_tempArray));
+	
+	// housing
+	_tempArray = [];
+	_tempArray.push(Station.Resources.Housing.name);
+	_tempArray.push(_ship.resourceMgr.housingAvailable + "/" + (_ship.resourceMgr.housingUsed + _ship.resourceMgr.housingAvailable));	
+	Station.ShipView.resources.push(Station.TableViewer.createEntry(_tempArray));
 	
 	Station.Interface.loadView(Station.ShipView);
 };
