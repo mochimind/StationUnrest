@@ -13,13 +13,31 @@ Station.Modules.modules = function() {
 
 // module is the module you want to change, _gifts is an array of modules you want to add to the ship
 // this function is very dumb, it won't do any error checking
-Station.Modules.adjustModules = function(_module, _gifts) {
+Station.Modules.adjustModules = function(_ship, _gifts) {
 	for (var j=0 ; j<_gifts.length ; j++) {
-		_module.modCount[_gifts[j][0]] += _gifts[j][1];
+		_ship.modules.modCount[_gifts[j][0]] += _gifts[j][1];
 		var _modSpace = Station.Modules.getModuleFromID(_gifts[j][0]).space;
-		_module.availableSpace -= _gifts[j][1] * _modSpace;
-		_module.usedSpace += _gifts[j][1] * _modSpace;
+		_ship.modules.availableSpace -= _gifts[j][1] * _modSpace;
+		_ship.modules.usedSpace += _gifts[j][1] * _modSpace;
+		
+		// activate effects:
+		Station.Modules.activateEffect(_ship, _gifts[j][0], _gifts[j][1]);
+		console.log("todo: implement effect");
 	}
+};
+
+// _mgr is the module manager, _modID is the id of the module that has the efect, _count is the number of times it's activated
+Station.Modules.activateEffect = function(_ship, _modID, _count) {
+	var _tempMod = Station.Modules.getModuleFromID(_modID);
+	if (_tempMod.effect != undefined) {
+		for (var i=0 ; i<_tempMod.effect.length ; i++) {
+			if (_tempMod.effect[i][0] == Station.Resources.Power.id) {
+				_ship.resourceMgr.powerAvailable += _tempMod.effect[i][1] * _count;
+			} else if (_tempMod.effect[i][0] == Station.Resources.Housing.id) {
+				_ship.resourceMgr.housingAvailable += _tempMod.effect[i][1] * _count;
+			}
+		}
+	}	
 };
 
 Station.Modules.addModule = function(_ship, _module, _count) {
@@ -37,6 +55,8 @@ Station.Modules.addModule = function(_ship, _module, _count) {
 		return false;
 	}
 	
+	console.log("todo: implement effort to build buildings");
+	
 	// consume the resources
 	Station.ResourceMgr.adjustResources(_ship.resourceMgr, _tempResource, false);
 	
@@ -46,18 +66,11 @@ Station.Modules.addModule = function(_ship, _module, _count) {
 	
 	// reward the modules
 	_ship.modules.modCount[_module] += _count;
-	Station.Interface.updateInterface();
 	
 	// check for effects
-	if (_tempMod.effect != undefined) {
-		for (var i=0 ; i<_tempMod.effect.length ; i++) {
-			if (_tempMod.effect[i][0] == Station.Resources.Power.id) {
-				_ship.resourceMgr.powerAvailable += _tempMod.effect[i][1];
-			} else if (_tempMod.effects[i][0] == Station.Resources.Housing.id) {
-				_ship.resourceMgr.housingAvailable += _tempMod.effect[i][1];
-			}
-		}
-	}
+	Station.Modules.activateEffect(_ship, _module, _count);
+
+	Station.Interface.updateInterface();
 };
 
 Station.Modules.removeModule = function(_moduleMgr, _modules, _count) {

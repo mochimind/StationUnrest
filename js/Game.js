@@ -9,7 +9,7 @@ Station.Game.init = function() {
 	_addObj.push([Station.Modules.CrewBarracks.id, 1]);
 	_addObj.push([Station.Modules.OrganicsProcessor.id, 1]);
 	_addObj.push([Station.Modules.Refinery.id, 1]);
-	Station.Modules.adjustModules(_addShip.modules, _addObj);
+	Station.Modules.adjustModules(_addShip, _addObj);
 	
 	_addObj = new Station.Resources.bundle();
 	Station.Resources.adjustResource(_addObj, Station.Resources.Polymer.id, 101, true);

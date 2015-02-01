@@ -55,10 +55,20 @@ Station.ShipView.updateView = function() {
 	for (var i=0 ; i<Station.ShipView.ship.modules.modCount.length ; i++) {
 		Station.TableViewer.modifyEntry(Station.ShipView.modules[i], 1, Station.ShipView.ship.modules.modCount[i]);
 	}
-	
-	for (var i=0 ; i<Station.ShipView.ship.resourceMgr.available.resources.length ; i++) {
+
+	var i;
+	for (i=0 ; i<Station.ShipView.ship.resourceMgr.available.resources.length ; i++) {
 		Station.TableViewer.modifyEntry(Station.ShipView.resources[i], 1, Station.ShipView.ship.resourceMgr.available.resources[i]);
 	}
+	
+	// power
+	Station.TableViewer.modifyEntry(Station.ShipView.resources[i], 1, Station.ShipView.ship.resourceMgr.powerAvailable + "/" + 
+			(Station.ShipView.ship.resourceMgr.powerUsed + Station.ShipView.ship.resourceMgr.powerAvailable));
+	i++;
+	
+	// housing
+	Station.TableViewer.modifyEntry(Station.ShipView.resources[i], 1, Station.ShipView.ship.resourceMgr.housingAvailable + "/" + 
+			(Station.ShipView.ship.resourceMgr.housingUsed + Station.ShipView.ship.resourceMgr.housingAvailable));
 };
 
 Station.ShipView.unloadView = function() {
