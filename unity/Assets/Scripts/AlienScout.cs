@@ -4,9 +4,7 @@ using System.Collections;
 public class AlienScout : MonoBehaviour {
 
 	private GameObject target = null;
-	public float cooldownTime = 1f;
-	public float fireTime = 0.8f;
-	public int damage = 5;
+	public float rotationOffset;
 
 	private LineRenderer laser;
 

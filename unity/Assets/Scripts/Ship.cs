@@ -6,14 +6,11 @@ public class Ship : MonoBehaviour {
 
 	public int maxHealth;
 	public int curHealth;
+	public float rotationOffset;
 	public List<Targeter> watchers;
 
-	private Vector3 destination;
-	private bool moving = false;
-	public float moveSpeed;
-	public float turnSpeed;
-
 	public List<GameObject> weapons;
+	public GameObject engine;
 
 	public interface Targeter {
 		void handleDeath();
@@ -27,14 +24,7 @@ public class Ship : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (moving) {
-			Debug.Log ("trying");
-			transform.position = Vector2.MoveTowards(transform.position, destination, moveSpeed);
-			if (transform.position == destination) {
-				Debug.Log ("stopped moving");
-				moving = false;
-			}
-		}
+
 	}
 
 	public float getPercentHealth() {
@@ -60,8 +50,6 @@ public class Ship : MonoBehaviour {
 	}
 
 	public void moveToCoords(Vector3 mousePos) {
-		destination = new Vector2 (mousePos.x, mousePos.y);
-		moving = true;
+		engine.GetComponent<Thruster> ().startMove (mousePos, rotationOffset);
 	}
-
 }

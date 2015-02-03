@@ -5,7 +5,9 @@ public class PlayerShip : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		GameObject engine = (GameObject) Instantiate (Resources.Load ("ShipModules/Engines/AlienLightThruster"));
+		engine.transform.parent = transform;
+		gameObject.GetComponent<Ship> ().engine = engine;
 	}
 	
 	// Update is called once per frame
