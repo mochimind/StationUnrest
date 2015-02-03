@@ -10,7 +10,10 @@ public class Ship : MonoBehaviour {
 
 	private Vector3 destination;
 	private bool moving = false;
-	public float speed;
+	public float moveSpeed;
+	public float turnSpeed;
+
+	public List<GameObject> weapons;
 
 	public interface Targeter {
 		void handleDeath();
@@ -19,13 +22,14 @@ public class Ship : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		watchers = new List<Targeter> ();
+		weapons = new List<GameObject> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (moving) {
 			Debug.Log ("trying");
-			transform.position = Vector2.MoveTowards(transform.position, destination, speed);
+			transform.position = Vector2.MoveTowards(transform.position, destination, moveSpeed);
 			if (transform.position == destination) {
 				Debug.Log ("stopped moving");
 				moving = false;

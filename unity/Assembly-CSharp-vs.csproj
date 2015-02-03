@@ -54,6 +54,8 @@
      <Compile Include="Assets\Scripts\PlayerShip.cs" />
      <Compile Include="Assets\Scripts\PlayerShipMgr.cs" />
      <Compile Include="Assets\Scripts\Ship.cs" />
+     <Compile Include="Assets\Scripts\Weapons\AlienScoutLaser.cs" />
+     <Compile Include="Assets\Scripts\Weapons\Weapon.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.2/UnityEngine.UI.dll</HintPath>
  </Reference>

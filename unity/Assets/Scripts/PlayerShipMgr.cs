@@ -14,7 +14,8 @@ public class PlayerShipMgr : MonoBehaviour {
 		ships = new List<GameObject> ();
 
 		// instantiate a player ship at 0,0
-		GameObject addObj = (GameObject)Instantiate (_playerShip); 
+		//GameObject addObj = (GameObject)Instantiate (_playerShip); 
+		GameObject addObj = (GameObject)Instantiate(Resources.Load ("PlayerShip"));
 		ships.Add(addObj);
 
 
