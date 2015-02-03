@@ -12,4 +12,8 @@ public class PlayerShip : MonoBehaviour {
 	void Update () {
 	
 	}
+
+	void clicked() {
+		GUIMgr.SelectShip (gameObject);
+	}
 }

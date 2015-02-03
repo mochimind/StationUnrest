@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class PlayerShipMgr : MonoBehaviour {
 
 	public GameObject _playerShip;
+
 	private static PlayerShipMgr instance;
 	private List<GameObject> ships;
 
@@ -13,7 +14,10 @@ public class PlayerShipMgr : MonoBehaviour {
 		ships = new List<GameObject> ();
 
 		// instantiate a player ship at 0,0
-		ships.Add((GameObject)Instantiate (_playerShip));
+		GameObject addObj = (GameObject)Instantiate (_playerShip); 
+		addObj.GetComponent<Ship> ().maxHealth = 100;
+		ships.Add(addObj);
+
 
 		// lock in this instance
 		instance = this;

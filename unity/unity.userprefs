@@ -1,10 +1,11 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PlayerShipMgr.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\AlienScout.cs">
     <Files>
-      <File FileName="Assets\Scripts\PlayerShipMgr.cs" Line="10" Column="2" />
-      <File FileName="Assets\Scripts\GameManager.cs" Line="18" Column="41" />
-      <File FileName="Assets\Scripts\AlienScout.cs" Line="65" Column="19" />
+      <File FileName="Assets\Scripts\ClickHandler.cs" Line="21" Column="28" />
+      <File FileName="Assets\Scripts\PlayerShip.cs" Line="17" Column="1" />
+      <File FileName="Assets\Scripts\GUIMgr.cs" Line="33" Column="32" />
+      <File FileName="Assets\Scripts\AlienScout.cs" Line="82" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
