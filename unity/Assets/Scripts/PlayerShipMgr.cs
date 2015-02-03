@@ -15,7 +15,6 @@ public class PlayerShipMgr : MonoBehaviour {
 
 		// instantiate a player ship at 0,0
 		GameObject addObj = (GameObject)Instantiate (_playerShip); 
-		addObj.GetComponent<Ship> ().maxHealth = 100;
 		ships.Add(addObj);
 
 

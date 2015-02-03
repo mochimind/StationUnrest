@@ -10,10 +10,13 @@ public class PlayerShip : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
 	}
 
 	void clicked() {
 		GUIMgr.SelectShip (gameObject);
+	}
+
+	void offTargetClick(Vector3 mousePos) {
+		gameObject.GetComponent<Ship> ().moveToCoords (mousePos);
 	}
 }

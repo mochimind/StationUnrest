@@ -5,13 +5,16 @@ using System.Collections.Generic;
 public class Ship : MonoBehaviour {
 
 	public int maxHealth;
+	public int curHealth;
 	public List<Targeter> watchers;
+
+	private Vector3 destination;
+	private bool moving = false;
+	public float speed;
 
 	public interface Targeter {
 		void handleDeath();
 	}
-
-	private int curHealth = -1;
 
 	// Use this for initialization
 	void Start () {
@@ -20,8 +23,13 @@ public class Ship : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (curHealth == -1) {
-			curHealth = maxHealth;
+		if (moving) {
+			Debug.Log ("trying");
+			transform.position = Vector2.MoveTowards(transform.position, destination, speed);
+			if (transform.position == destination) {
+				Debug.Log ("stopped moving");
+				moving = false;
+			}
 		}
 	}
 
@@ -46,4 +54,10 @@ public class Ship : MonoBehaviour {
 			Destroy (this.gameObject);
 		}
 	}
+
+	public void moveToCoords(Vector3 mousePos) {
+		destination = new Vector2 (mousePos.x, mousePos.y);
+		moving = true;
+	}
+
 }

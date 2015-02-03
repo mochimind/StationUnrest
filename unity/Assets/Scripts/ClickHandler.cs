@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class ClickHandler : MonoBehaviour {
 
+	private GameObject target = null;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -17,8 +19,9 @@ public class ClickHandler : MonoBehaviour {
 			if (hit.collider != null) {
 				// check if it's a ship
 				hit.collider.gameObject.BroadcastMessage("clicked", SendMessageOptions.DontRequireReceiver);
-			} else {
-				GUIMgr.SelectNothing();
+				target = hit.collider.gameObject;
+			} else if(target != null) {
+				target.BroadcastMessage("offTargetClick", Camera.main.ScreenToWorldPoint(Input.mousePosition), SendMessageOptions.DontRequireReceiver);
 			}
 		}
 	}

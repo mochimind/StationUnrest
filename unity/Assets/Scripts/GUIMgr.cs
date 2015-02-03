@@ -21,7 +21,9 @@ public class GUIMgr : MonoBehaviour {
 			shipDisplay.SetActive(true);
 			GameObject healthBack = shipDisplay.transform.FindChild("HealthBack").gameObject;
 			float percentHealth = selectedShip.GetComponent<Ship>().getPercentHealth();
-			healthBack.transform.position = new Vector3(0.25f - (1f - percentHealth) * 0.1f, healthBack.transform.position.y, healthBack.transform.position.z);
+			if (percentHealth >= 0f) {
+				healthBack.transform.position = new Vector3(0.25f - (1f - percentHealth) * 0.1f, healthBack.transform.position.y, healthBack.transform.position.z);
+			}
 		}
 	}
 
