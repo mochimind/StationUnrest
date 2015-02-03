@@ -35,7 +35,7 @@ public class Weapon : MonoBehaviour, Ship.Targeter {
 
 	public virtual void processFire() {}
 
-	void Ship.Targeter.handleDeath() {
+	void Ship.Targeter.handleTargetDeath() {
 		ceaseFire ();
 		Debug.Log ("todo: implement switching targets");
 	}

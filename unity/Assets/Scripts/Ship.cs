@@ -13,7 +13,7 @@ public class Ship : MonoBehaviour {
 	public GameObject engine;
 
 	public interface Targeter {
-		void handleDeath();
+		void handleTargetDeath();
 	}
 
 	// Use this for initialization
@@ -43,7 +43,7 @@ public class Ship : MonoBehaviour {
 		curHealth -= damage;
 		if (curHealth <= 0) {
 			foreach (Targeter t in watchers) {
-				t.handleDeath();
+				t.handleTargetDeath();
 			}
 			Destroy (this.gameObject);
 		}
@@ -51,5 +51,9 @@ public class Ship : MonoBehaviour {
 
 	public void moveToCoords(Vector3 mousePos) {
 		engine.GetComponent<Thruster> ().startMove (mousePos, rotationOffset);
+	}
+
+	public void looktAt(Vector3 location) {
+		engine.GetComponent<Thruster> ().startLook (location, rotationOffset);
 	}
 }
