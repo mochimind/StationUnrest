@@ -65,28 +65,16 @@ public class Thruster : MonoBehaviour {
 
 	private void initalizeMove(float rotationalOffset) {
 		state = ThrusterState.Rotating;
-		Vector3 dir = destination - transform.position;
-		targetRotation = Mathf.Atan2(dir.y,dir.x) * Mathf.Rad2Deg + rotationalOffset;
-		Debug.Log ("dir: " + dir + "||" + targetRotation);
+		targetRotation = Angle.RotationAngle (transform.parent, destination, rotationalOffset);
 		startingRotation = transform.parent.rotation.eulerAngles.z;
 		if (startingRotation > 180) {
 			startingRotation -= 360;
 		}
 		curRotation = 0f;
-		
-		float angle = targetRotation - startingRotation;
-		if (angle > 180) {
-			angle -= 360;
-		} else if (angle < -180) {
-			angle += 360;
-		}
-		
-		Debug.Log ("target " + targetRotation + ", start " + startingRotation + ", angle " + angle);
-		if (Mathf.Abs (angle) < 3) {
+		if (Mathf.Abs (targetRotation) < 3) {
 			// know when to stop
 			state = ThrusterState.Stopped;
 		}
-		targetRotation = angle;
 	}
 
 	public void startLook(Vector3 _destination, float rotationOffset) {

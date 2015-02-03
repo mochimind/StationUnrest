@@ -7,6 +7,9 @@ public class AlienScoutLaser : Weapon{
 	public float firingTime;
 	public int pulseCount;
 	public float pulseDelay;
+	public float firingArc;	// degrees
+	public float maxRange;
+	public float gunRotation;
 
 	private curState state = curState.Ready;
 	private int pulses;
@@ -21,12 +24,15 @@ public class AlienScoutLaser : Weapon{
 	public override void processFire () {
 		nextStateCountdown -= Time.deltaTime ;
 		if (state == curState.Ready || (state == curState.GunCooldown && nextStateCountdown <= 0f)) {
-			nextStateCountdown = firingTime;
-			pulses = pulseCount;
-			state = curState.Pulsing;
-			pulses --;
-
-			fire ();
+			// if there's a shot, take it
+			if (inFiringSolution()) {
+				nextStateCountdown = firingTime;
+				pulses = pulseCount;
+				state = curState.Pulsing;
+				pulses --;
+				fire ();
+			}
+			// wait for the shot to clear
 		} else if (state == curState.Pulsing) {
 			laser.SetPosition (0, transform.parent.position);
 			laser.SetPosition (1, target.transform.position);
@@ -47,6 +53,23 @@ public class AlienScoutLaser : Weapon{
 				nextStateCountdown = firingTime;
 				fire ();
 			}
+		}
+	}
+
+	private bool inFiringSolution() {
+		// check if in firing arc
+		float offsetAngle = gunRotation + transform.parent.gameObject.GetComponent<Ship> ().rotationOffset;
+		if (Mathf.Abs(Angle.RotationAngle (transform.parent, target.transform.position, offsetAngle)) > firingArc) {
+			return false;
+		}
+
+		// check if in firing range
+		float curDist = Vector2.Distance (new Vector2(transform.parent.position.x, transform.parent.position.y), 
+		                                  new Vector2(target.transform.position.x, target.transform.position.y));
+		if (curDist > maxRange) {
+			return false;
+		} else {
+			return true;
 		}
 	}
 
