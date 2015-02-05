@@ -7,10 +7,13 @@ public class Ship : MonoBehaviour {
 	public int maxHealth;
 	public int curHealth;
 	public float rotationOffset;
+	public int size;
 	public List<Targeter> watchers;
 
 	public List<GameObject> weapons;
 	public GameObject engine;
+
+	private List<GameObject>[] weaponResolutions = new List<GameObject>[4];
 
 	public interface Targeter {
 		void handleTargetDeath();

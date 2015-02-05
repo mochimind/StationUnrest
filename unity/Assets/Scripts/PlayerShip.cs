@@ -5,7 +5,7 @@ public class PlayerShip : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		GameObject engine = (GameObject) Instantiate (Resources.Load ("ShipModules/Engines/AlienLightThruster"));
+		GameObject engine = (GameObject) Instantiate (Resources.Load ("ShipModules/Engines/CruiserDefaultThruster"));
 		engine.transform.parent = transform;
 		gameObject.GetComponent<Ship> ().engine = engine;
 	}
