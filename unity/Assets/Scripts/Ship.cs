@@ -15,11 +15,6 @@ public class Ship : MonoBehaviour {
 
 	private List<GameObject>[] weaponResolutions = new List<GameObject>[4];
 
-	public interface Targeter {
-		void handleTargetDeath();
-		void handleTargetMove(Vector3 mousePos);
-	}
-
 	// Use this for initialization
 	void Start () {
 

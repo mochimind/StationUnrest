@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AlienScout : MonoBehaviour, Ship.Targeter {
+public class AlienScout : MonoBehaviour, Targeter {
 
 	private GameObject target = null;
 	public float rotationOffset;
@@ -40,12 +40,12 @@ public class AlienScout : MonoBehaviour, Ship.Targeter {
 		}
 	}
 
-	void Ship.Targeter.handleTargetDeath() {
+	void Targeter.handleTargetDeath() {
 		target = null;
 		Debug.Log ("handle switching targets from alien scout");
 	}
 
-	void Ship.Targeter.handleTargetMove(Vector3 _location) {
+	void Targeter.handleTargetMove(Vector3 _location) {
 	}
 
 	private void faceTarget() {

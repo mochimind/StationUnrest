@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class Weapon : MonoBehaviour, Ship.Targeter {
+public class Weapon : MonoBehaviour, Targeter {
 
 	public GameObject target; 
 
@@ -47,6 +47,9 @@ public class Weapon : MonoBehaviour, Ship.Targeter {
 	}
 	
 	public void setTarget(GameObject _target) {
+		if (target != null) {
+			target.GetComponent<Ship> ().handleStopTarget (this);
+		}
 		target = _target;
 		target.GetComponent<Ship> ().handleTarget (this);
 	}
@@ -62,12 +65,12 @@ public class Weapon : MonoBehaviour, Ship.Targeter {
 
 	public virtual void processFire() {}
 
-	void Ship.Targeter.handleTargetDeath() {
+	void Targeter.handleTargetDeath() {
 		ceaseFire ();
 		Debug.Log ("todo: implement switching targets");
 	}
 
-	void Ship.Targeter.handleTargetMove(Vector3 _target) {
+	void Targeter.handleTargetMove(Vector3 _target) {
 		if (!inFiringSolution (_target)) {
 			targetMovingOutOfRange = true;
 		} else {
@@ -92,7 +95,7 @@ public class Weapon : MonoBehaviour, Ship.Targeter {
 			return true;
 		}
 	}
-
+	
 	public void autoTarget() {
 		// acquire a target
 		Debug.Log ("this is inefficient, looks at all game objects a lot");

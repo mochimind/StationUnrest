@@ -38,3 +38,9 @@ public class TargetResolution {
 	public static readonly int LARGE = 3;
 	public static readonly int CAPITAL = 4;
 }
+
+
+public interface Targeter {
+	void handleTargetDeath();
+	void handleTargetMove(Vector3 mousePos);
+}
