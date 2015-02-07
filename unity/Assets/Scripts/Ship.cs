@@ -8,21 +8,21 @@ public class Ship : MonoBehaviour {
 	public int curHealth;
 	public float rotationOffset;
 	public int size;
-	public List<Targeter> watchers;
+	public List<Targeter> watchers  = new List<Targeter> ();
 
-	public List<GameObject> weapons;
+	public List<GameObject> weapons = new List<GameObject> ();
 	public GameObject engine;
 
 	private List<GameObject>[] weaponResolutions = new List<GameObject>[4];
 
 	public interface Targeter {
 		void handleTargetDeath();
+		void handleTargetMove(Vector3 mousePos);
 	}
 
 	// Use this for initialization
 	void Start () {
-		watchers = new List<Targeter> ();
-		weapons = new List<GameObject> ();
+
 	}
 	
 	// Update is called once per frame
@@ -52,8 +52,24 @@ public class Ship : MonoBehaviour {
 		}
 	}
 
+	public void handleClick() {
+		Debug.Log ("clicky" + weapons.Count);
+		foreach (GameObject token in weapons) {
+			token.GetComponent<Weapon>().showFiringArcs();
+		}
+	}
+
+	public void handleUnclick() {
+		foreach (GameObject token in weapons) {
+			token.GetComponent<Weapon>().hideFiringArcs();
+		}
+	}
+
 	public void moveToCoords(Vector3 mousePos) {
 		engine.GetComponent<Thruster> ().startMove (mousePos, rotationOffset);
+		foreach (Targeter t in watchers) {
+			t.handleTargetMove(mousePos);
+		}
 	}
 
 	public void looktAt(Vector3 location) {

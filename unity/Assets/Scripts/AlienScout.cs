@@ -12,10 +12,12 @@ public class AlienScout : MonoBehaviour, Ship.Targeter {
 	void Start () {
 		// give the scout a weapon
 		GameObject equip = (GameObject) Instantiate (Resources.Load("ShipModules/Weapons/AlienScoutLaser"));
+		equip.transform.position = transform.position;
 		equip.transform.parent = transform;
 		gameObject.GetComponent<Ship> ().weapons.Add (equip);
 
 		equip = (GameObject) Instantiate (Resources.Load ("ShipModules/Engines/AlienLightThruster"));
+		equip.transform.position = transform.position;
 		equip.transform.parent = transform;
 		gameObject.GetComponent<Ship> ().engine = equip;
 
@@ -33,6 +35,7 @@ public class AlienScout : MonoBehaviour, Ship.Targeter {
 	// Update is called once per frame
 	void Update () {
 		if (target != null) {
+			Debug.Log ("fix this!");
 			gameObject.GetComponent<Ship>().looktAt(target.transform.position);
 		}
 	}
@@ -40,6 +43,9 @@ public class AlienScout : MonoBehaviour, Ship.Targeter {
 	void Ship.Targeter.handleTargetDeath() {
 		target = null;
 		Debug.Log ("handle switching targets from alien scout");
+	}
+
+	void Ship.Targeter.handleTargetMove(Vector3 _location) {
 	}
 
 	private void faceTarget() {

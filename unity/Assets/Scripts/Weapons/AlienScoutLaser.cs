@@ -5,12 +5,11 @@ public class AlienScoutLaser : Weapon{
 
 	private LineRenderer laser;
 
-
 	public override void processFire () {
 		nextStateCountdown -= Time.deltaTime ;
 		if (state == Weapon.FiringState.Ready || (state == Weapon.FiringState.GunCooldown && nextStateCountdown <= 0f)) {
 			// if there's a shot, take it
-			if (inFiringSolution(target.transform.position)) {
+			if (hasFiringSolution) {
 				nextStateCountdown = firingTime;
 				pulses = pulseCount;
 				state = Weapon.FiringState.Pulsing;
@@ -40,8 +39,7 @@ public class AlienScoutLaser : Weapon{
 			}
 		}
 	}
-
-
+	
 	private void fire() {
 		laser = gameObject.AddComponent<LineRenderer> ();
 		laser.material = new Material (Shader.Find ("Particles/Additive"));
@@ -56,5 +54,17 @@ public class AlienScoutLaser : Weapon{
 			Destroy (laser);
 		}
 		state = Weapon.FiringState.Stopped;
+	}
+
+	protected override void enableFiringArcs () {
+		setFiringArc (FiringArc.Top, true);
+	}
+
+	public override void showFiringArcs (){
+		setFiringArcVisibility (FiringArc.Top, true);
+	}
+
+	public override void hideFiringArcs () {
+		setFiringArcVisibility (FiringArc.Top, false);
 	}
 }

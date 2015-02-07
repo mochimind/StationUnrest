@@ -1,15 +1,18 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\ClickHandler.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Weapons\AlienScoutLaser.cs">
     <Files>
-      <File FileName="Assets\Scripts\CameraController.cs" Line="20" Column="76" />
-      <File FileName="Assets\Scripts\GUIMgr.cs" Line="26" Column="63" />
-      <File FileName="Assets\Scripts\ClickHandler.cs" Line="37" Column="46" />
-      <File FileName="Assets\Scripts\PlayerShip.cs" Line="16" Column="2" />
+      <File FileName="Assets\Scripts\Ship.cs" Line="79" Column="1" />
+      <File FileName="Assets\Scripts\Engines\Thruster.cs" Line="84" Column="1" />
+      <File FileName="Assets\Scripts\Weapons\Weapon.cs" Line="33" Column="1" />
+      <File FileName="Assets\Scripts\AlienScout.cs" Line="30" Column="4" />
+      <File FileName="Assets\Scripts\Weapons\AlienScoutLaser.cs" Line="11" Column="33" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="C:\Users\jxie\Desktop\Station Unrest\unity\Assets\Scripts\Weapons\AlienScoutLaser.cs" line="12" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

@@ -16,11 +16,17 @@ public class Weapon : MonoBehaviour, Ship.Targeter {
 	public float maxRange;
 	public float gunRotation;
 	public int resolution;
-	
+
 	protected FiringState state = FiringState.Ready;
 	protected int pulses;
 	protected float nextStateCountdown = 0f;
+	protected bool hasFiringSolution = false;
+	private bool targetMovingOutOfRange = false;
 
+
+	protected enum FiringArc {
+		Top, Bottom, Left, Right
+	}
 	
 	protected enum FiringState {
 		GunCooldown, PulseCooldown, Pulsing, Ready, Stopped
@@ -28,7 +34,9 @@ public class Weapon : MonoBehaviour, Ship.Targeter {
 
 	// Use this for initialization
 	void Start () {
-	
+		disableAllFiringArc ();
+		enableFiringArcs ();
+		//hideFiringArcs ();
 	}
 	
 	// Update is called once per frame
@@ -37,7 +45,7 @@ public class Weapon : MonoBehaviour, Ship.Targeter {
 			processFire();
 		}
 	}
-
+	
 	public void setTarget(GameObject _target) {
 		target = _target;
 		target.GetComponent<Ship> ().handleTarget (this);
@@ -59,7 +67,16 @@ public class Weapon : MonoBehaviour, Ship.Targeter {
 		Debug.Log ("todo: implement switching targets");
 	}
 
+	void Ship.Targeter.handleTargetMove(Vector3 _target) {
+		if (!inFiringSolution (_target)) {
+			targetMovingOutOfRange = true;
+		} else {
+			targetMovingOutOfRange = false;
+		}
+	}
+
 	public bool inFiringSolution(Vector3 _targetPos) {
+		Debug.Log ("firing arc really inefficient");
 		// check if in firing arc
 		float offsetAngle = gunRotation + transform.parent.gameObject.GetComponent<Ship> ().rotationOffset;
 		if (Mathf.Abs(Angle.RotationAngle (transform.parent, _targetPos, offsetAngle)) > firingArc) {
@@ -77,6 +94,7 @@ public class Weapon : MonoBehaviour, Ship.Targeter {
 	}
 
 	public void autoTarget() {
+		// acquire a target
 		Debug.Log ("this is inefficient, looks at all game objects a lot");
 		foreach (GameObject targetable in Targeting.GetTargetableEnemies (resolution, transform.parent.tag)) {
 			if (inFiringSolution(targetable.transform.position)) {
@@ -85,4 +103,37 @@ public class Weapon : MonoBehaviour, Ship.Targeter {
 			}
 		}
 	}
+
+	protected void disableAllFiringArc() {
+		transform.FindChild ("FiringArcTop").gameObject.SetActive (false);
+		transform.FindChild ("FiringArcBottom").gameObject.SetActive (false);
+		transform.FindChild ("FiringArcLeft").gameObject.SetActive (false);
+		transform.FindChild ("FiringArcRight").gameObject.SetActive (false);
+	}
+
+	protected void setFiringArc(FiringArc arc, bool enabled) {
+		getArcGameObj(arc).SetActive (enabled);
+	}
+
+	protected GameObject getArcGameObj(FiringArc arc) {
+		if (arc == FiringArc.Top) {
+			return transform.FindChild("FiringArcTop").gameObject;
+		} else if (arc == FiringArc.Bottom) {
+			return transform.FindChild("FiringArcBottom").gameObject;
+		} else if (arc == FiringArc.Left) {
+			return transform.FindChild("FiringArcLeft").gameObject;
+		} else {
+			return transform.FindChild("FiringArcRight").gameObject;
+		}
+	}
+
+	protected void setFiringArcVisibility(FiringArc arc, bool visible) {
+		getArcGameObj (arc).GetComponent<SpriteRenderer> ().enabled = visible;
+	}
+
+	public virtual void showFiringArcs() { }
+
+	public virtual void hideFiringArcs() { }
+
+	protected virtual void enableFiringArcs() { }
 }

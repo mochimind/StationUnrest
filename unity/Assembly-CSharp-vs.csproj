@@ -46,6 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\AI\FrontFireAttack.cs" />
      <Compile Include="Assets\Scripts\AlienScout.cs" />
      <Compile Include="Assets\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\ClickHandler.cs" />
@@ -53,10 +54,13 @@
      <Compile Include="Assets\Scripts\Engines\CruiserDefaultThruster.cs" />
      <Compile Include="Assets\Scripts\Engines\Thruster.cs" />
      <Compile Include="Assets\Scripts\FiringArc.cs" />
-     <Compile Include="Assets\Scripts\GUIMgr.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
+     <Compile Include="Assets\Scripts\Interface\BuildBack.cs" />
      <Compile Include="Assets\Scripts\Interface\BuildButton.cs" />
+     <Compile Include="Assets\Scripts\Interface\BuildGUIMgr.cs" />
+     <Compile Include="Assets\Scripts\Interface\BuildingView.cs" />
      <Compile Include="Assets\Scripts\Interface\ClosePopupPanel.cs" />
+     <Compile Include="Assets\Scripts\Interface\MainGUIMgr.cs" />
      <Compile Include="Assets\Scripts\PlayerShip.cs" />
      <Compile Include="Assets\Scripts\PlayerShipMgr.cs" />
      <Compile Include="Assets\Scripts\Ship.cs" />

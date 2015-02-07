@@ -16,8 +16,12 @@ public class Angle {
 		} else if (angle < -180) {
 			angle += 360;
 		}
-		
+
 		//Debug.Log ("target " + targetRotation + ", start " + startingRotation + ", angle " + angle);
 		return angle; 
+	}
+
+	public static float RotationalOffset(Transform baseObj, float offset) {
+		return baseObj.rotation.eulerAngles.z + offset;
 	}
 }

@@ -5,9 +5,13 @@ public class PlayerShip : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		GameObject engine = (GameObject) Instantiate (Resources.Load ("ShipModules/Engines/CruiserDefaultThruster"));
-		engine.transform.parent = transform;
-		gameObject.GetComponent<Ship> ().engine = engine;
+		GameObject equip = (GameObject) Instantiate (Resources.Load ("ShipModules/Engines/CruiserDefaultThruster"));
+		equip.transform.parent = transform;
+		gameObject.GetComponent<Ship> ().engine = equip;
+
+		equip = (GameObject)Instantiate (Resources.Load ("ShipModules/Weapons/AlienScoutLaser"));
+		equip.transform.parent = transform;
+		gameObject.GetComponent<Ship> ().weapons.Add (equip);
 	}
 	
 	// Update is called once per frame
@@ -15,7 +19,8 @@ public class PlayerShip : MonoBehaviour {
 	}
 
 	void clicked() {
-		GUIMgr.SelectShip (gameObject);
+		MainGUIMgr.SelectShip (gameObject);
+		gameObject.GetComponent<Ship> ().handleClick ();
 	}
 
 	void offTargetClick(Vector3 mousePos) {

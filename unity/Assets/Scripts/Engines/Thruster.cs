@@ -65,6 +65,7 @@ public class Thruster : MonoBehaviour {
 
 	private void initalizeMove(float rotationalOffset) {
 		state = ThrusterState.Rotating;
+		Debug.Log ("hit");
 		targetRotation = Angle.RotationAngle (transform.parent, destination, rotationalOffset);
 		startingRotation = transform.parent.rotation.eulerAngles.z;
 		if (startingRotation > 180) {
