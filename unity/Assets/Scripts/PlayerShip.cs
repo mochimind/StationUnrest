@@ -23,6 +23,11 @@ public class PlayerShip : MonoBehaviour {
 		gameObject.GetComponent<Ship> ().handleClick ();
 	}
 
+	void unclicked() {
+		gameObject.GetComponent<Ship> ().handleUnclick ();
+		MainGUIMgr.SelectNothing ();
+	}
+
 	void offTargetClick(Vector3 mousePos) {
 		gameObject.GetComponent<Ship> ().moveToCoords (mousePos);
 	}

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AlienScout : MonoBehaviour, Targeter {
+public class AlienScout : MonoBehaviour {
 
 	private GameObject target = null;
 	public float rotationOffset;
@@ -20,36 +20,10 @@ public class AlienScout : MonoBehaviour, Targeter {
 		equip.transform.position = transform.position;
 		equip.transform.parent = transform;
 		gameObject.GetComponent<Ship> ().engine = equip;
-
-		// determine the nearest player ship
-		target = PlayerShipMgr.GetNearestShip (transform.position.x, transform.position.y);
-		foreach (GameObject weaponObj in gameObject.GetComponent<Ship>().weapons) {
-			Weapon weapon = weaponObj.GetComponent<Weapon>();
-			weapon.setTarget(target);
-			Debug.Log ("implement range checking");
-		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (target != null) {
-			//Debug.Log ("fix this!");
-			//gameObject.GetComponent<Ship>().looktAt(target.transform.position);
-		}
-	}
 
-	void Targeter.handleTargetDeath() {
-		target = null;
-		Debug.Log ("handle switching targets from alien scout");
 	}
-
-	void Targeter.handleTargetMove(Vector3 _location) {
-	}
-
-	private void faceTarget() {
-		Vector3 dir = target.transform.position - transform.position;
-		float angle = Mathf.Atan2(dir.y,dir.x) * Mathf.Rad2Deg;
-		transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-	}
-
 }

@@ -48,14 +48,12 @@ public class Ship : MonoBehaviour {
 	}
 
 	public void handleClick() {
-		Debug.Log ("clicky" + weapons.Count);
 		foreach (GameObject token in weapons) {
 			token.GetComponent<Weapon>().displayFiringArcs();
 		}
 	}
 
 	public void handleUnclick() {
-		Debug.Log ("hiding");
 		foreach (GameObject token in weapons) {
 			token.GetComponent<Weapon>().hideFiringArcs();
 		}

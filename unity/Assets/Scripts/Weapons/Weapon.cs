@@ -57,7 +57,6 @@ public class Weapon : MonoBehaviour, Targeter, FiringArcHandler.TargetingArcList
 	
 	void Targeter.handleTargetDeath() {
 		ceaseFire ();
-		Debug.Log ("todo: implement switching targets");
 	}
 	
 	void Targeter.handleTargetMove(Vector3 _target) {}
@@ -85,25 +84,6 @@ public class Weapon : MonoBehaviour, Targeter, FiringArcHandler.TargetingArcList
 
 	public virtual void processFire() {}
 
-
-	public bool inFiringSolution(Vector3 _targetPos) {
-		Debug.Log ("firing arc really inefficient");
-		// check if in firing arc
-		float offsetAngle = gunRotation + transform.parent.gameObject.GetComponent<Ship> ().rotationOffset;
-		if (Mathf.Abs(Angle.RotationAngle (transform.parent, _targetPos, offsetAngle)) > firingArc) {
-			return false;
-		}
-		
-		// check if in firing range
-		float curDist = Vector2.Distance (new Vector2(transform.parent.position.x, transform.parent.position.y), 
-		                                  new Vector2(_targetPos.x, _targetPos.y));
-		if (curDist > maxRange) {
-			return false;
-		} else {
-			return true;
-		}
-	}
-
 	protected void setFiringArc(string arc, bool enabled) {
 		transform.FindChild(arc).gameObject.SetActive (enabled);
 	}
@@ -116,13 +96,13 @@ public class Weapon : MonoBehaviour, Targeter, FiringArcHandler.TargetingArcList
 
 	public void displayFiringArcs() {
 		foreach (string token in getFiringArcs()) {
-			transform.FindChild(token).GetComponent<SpriteRenderer>().enabled = false;
+			transform.FindChild(token).GetComponent<SpriteRenderer>().enabled = true;
 		}
 	}
 
 	public void hideFiringArcs() {
 		foreach (string token in getFiringArcs()) {
-			transform.FindChild(token).GetComponent<SpriteRenderer>().enabled = true;
+			transform.FindChild(token).GetComponent<SpriteRenderer>().enabled = false;
 		}
 	}
 }

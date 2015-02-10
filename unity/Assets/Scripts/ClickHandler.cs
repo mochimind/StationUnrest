@@ -36,6 +36,9 @@ public class ClickHandler : MonoBehaviour {
 					if (hit.collider != null) {
 						// check if it's a ship
 						if (hit.collider.gameObject.tag == "Player" || hit.collider.gameObject.tag == "Alien") {
+							if (target != null) {
+								target.BroadcastMessage("unclicked", SendMessageOptions.DontRequireReceiver);
+							}
 							hit.collider.gameObject.BroadcastMessage ("clicked", SendMessageOptions.DontRequireReceiver);
 							target = hit.collider.gameObject;
 							return;

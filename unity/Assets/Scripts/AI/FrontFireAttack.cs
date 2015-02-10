@@ -1,15 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FrontFireAttack : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+public class FrontFireAttack : AI {
+	protected override bool acquireTarget () {
+		target = PlayerShipMgr.GetNearestShip (transform.position.x, transform.position.y);
+		return base.acquireTarget ();
 	}
 }
