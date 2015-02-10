@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class Weapon : MonoBehaviour, Targeter {
+public class Weapon : MonoBehaviour, Targeter, FiringArcHandler.TargetingArcListener {
 
 	public GameObject target; 
 
 	protected bool canFire = false;
+	protected bool allowFire = true;
 
 	public int damage;
 	public float firingDelay;
@@ -17,66 +18,73 @@ public class Weapon : MonoBehaviour, Targeter {
 	public float gunRotation;
 	public int resolution;
 
-	protected FiringState state = FiringState.Ready;
+	protected FiringState state = FiringState.Stopped;
 	protected int pulses;
 	protected float nextStateCountdown = 0f;
 	protected bool hasFiringSolution = false;
 	private bool targetMovingOutOfRange = false;
-
-
-	protected enum FiringArc {
-		Top, Bottom, Left, Right
-	}
 	
+
 	protected enum FiringState {
 		GunCooldown, PulseCooldown, Pulsing, Ready, Stopped
 	}
 
 	// Use this for initialization
 	void Start () {
-		disableAllFiringArc ();
-		enableFiringArcs ();
+		List<string> enabled = getFiringArcs ();
+		if (!enabled.Contains (FiringArc.TOP)) {
+			transform.FindChild(FiringArc.TOP).gameObject.SetActive(false);
+		}
+		if (!enabled.Contains (FiringArc.BOTTOM)) {
+			transform.FindChild(FiringArc.BOTTOM).gameObject.SetActive(false);
+		}
+		if (!enabled.Contains (FiringArc.LEFT)) {
+			transform.FindChild(FiringArc.LEFT).gameObject.SetActive(false);
+		}
+		if (!enabled.Contains (FiringArc.RIGHT)) {
+			transform.FindChild(FiringArc.RIGHT).gameObject.SetActive(false);
+		}
+
 		//hideFiringArcs ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (canFire) {
+		if (state != FiringState.Stopped) {
 			processFire();
 		}
 	}
 	
+	void Targeter.handleTargetDeath() {
+		ceaseFire ();
+		Debug.Log ("todo: implement switching targets");
+	}
+	
+	void Targeter.handleTargetMove(Vector3 _target) {}
+
+	void FiringArcHandler.TargetingArcListener.targetEntered () { 
+		if (state == FiringState.Stopped) {
+			state = FiringState.Ready;
+		}
+	}
+
+	void FiringArcHandler.TargetingArcListener.targetExited() { ceaseFire(); }
+
 	public void setTarget(GameObject _target) {
 		if (target != null) {
 			target.GetComponent<Ship> ().handleStopTarget (this);
 		}
 		target = _target;
 		target.GetComponent<Ship> ().handleTarget (this);
+		foreach (string token in getFiringArcs()) {
+			transform.FindChild(token).GetComponent<FiringArcHandler>().setTarget(target, this);
+		}
 	}
 
-	public void startFire () {
-		canFire = true;
-	}
-
-	public virtual void ceaseFire () {
-		target = null;
-		canFire = false;
-	}
+	public virtual void ceaseFire () { state = FiringState.Stopped; }
 
 	public virtual void processFire() {}
 
-	void Targeter.handleTargetDeath() {
-		ceaseFire ();
-		Debug.Log ("todo: implement switching targets");
-	}
-
-	void Targeter.handleTargetMove(Vector3 _target) {
-		if (!inFiringSolution (_target)) {
-			targetMovingOutOfRange = true;
-		} else {
-			targetMovingOutOfRange = false;
-		}
-	}
 
 	public bool inFiringSolution(Vector3 _targetPos) {
 		Debug.Log ("firing arc really inefficient");
@@ -95,48 +103,33 @@ public class Weapon : MonoBehaviour, Targeter {
 			return true;
 		}
 	}
-	
-	public void autoTarget() {
-		// acquire a target
-		Debug.Log ("this is inefficient, looks at all game objects a lot");
-		foreach (GameObject targetable in Targeting.GetTargetableEnemies (resolution, transform.parent.tag)) {
-			if (inFiringSolution(targetable.transform.position)) {
-				target = targetable;
-				return;
-			}
+
+	protected void setFiringArc(string arc, bool enabled) {
+		transform.FindChild(arc).gameObject.SetActive (enabled);
+	}
+
+	protected void setFiringArcVisibility(string arc, bool visible) {
+		transform.FindChild(arc).gameObject.GetComponent<SpriteRenderer> ().enabled = visible;
+	}
+
+	protected virtual List<string> getFiringArcs() { return null; }
+
+	public void displayFiringArcs() {
+		foreach (string token in getFiringArcs()) {
+			transform.FindChild(token).GetComponent<SpriteRenderer>().enabled = false;
 		}
 	}
 
-	protected void disableAllFiringArc() {
-		transform.FindChild ("FiringArcTop").gameObject.SetActive (false);
-		transform.FindChild ("FiringArcBottom").gameObject.SetActive (false);
-		transform.FindChild ("FiringArcLeft").gameObject.SetActive (false);
-		transform.FindChild ("FiringArcRight").gameObject.SetActive (false);
-	}
-
-	protected void setFiringArc(FiringArc arc, bool enabled) {
-		getArcGameObj(arc).SetActive (enabled);
-	}
-
-	protected GameObject getArcGameObj(FiringArc arc) {
-		if (arc == FiringArc.Top) {
-			return transform.FindChild("FiringArcTop").gameObject;
-		} else if (arc == FiringArc.Bottom) {
-			return transform.FindChild("FiringArcBottom").gameObject;
-		} else if (arc == FiringArc.Left) {
-			return transform.FindChild("FiringArcLeft").gameObject;
-		} else {
-			return transform.FindChild("FiringArcRight").gameObject;
+	public void hideFiringArcs() {
+		foreach (string token in getFiringArcs()) {
+			transform.FindChild(token).GetComponent<SpriteRenderer>().enabled = true;
 		}
 	}
+}
 
-	protected void setFiringArcVisibility(FiringArc arc, bool visible) {
-		getArcGameObj (arc).GetComponent<SpriteRenderer> ().enabled = visible;
-	}
-
-	public virtual void showFiringArcs() { }
-
-	public virtual void hideFiringArcs() { }
-
-	protected virtual void enableFiringArcs() { }
+public class FiringArc {
+	public static readonly string TOP = "FiringArcTop";
+	public static readonly string BOTTOM = "FiringArcBottom";
+	public static readonly string LEFT = "FiringArcLeft";
+	public static readonly string RIGHT = "FiringArcRight";
 }

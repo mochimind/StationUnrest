@@ -27,16 +27,14 @@ public class AlienScout : MonoBehaviour, Targeter {
 			Weapon weapon = weaponObj.GetComponent<Weapon>();
 			weapon.setTarget(target);
 			Debug.Log ("implement range checking");
-
-			weapon.startFire();
 		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (target != null) {
-			Debug.Log ("fix this!");
-			gameObject.GetComponent<Ship>().looktAt(target.transform.position);
+			//Debug.Log ("fix this!");
+			//gameObject.GetComponent<Ship>().looktAt(target.transform.position);
 		}
 	}
 

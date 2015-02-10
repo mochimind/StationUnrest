@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class AlienScoutLaser : Weapon{
 
@@ -9,14 +9,18 @@ public class AlienScoutLaser : Weapon{
 		nextStateCountdown -= Time.deltaTime ;
 		if (state == Weapon.FiringState.Ready || (state == Weapon.FiringState.GunCooldown && nextStateCountdown <= 0f)) {
 			// if there's a shot, take it
+			/*
 			if (hasFiringSolution) {
-				nextStateCountdown = firingTime;
-				pulses = pulseCount;
-				state = Weapon.FiringState.Pulsing;
-				pulses --;
-				fire ();
 			}
 			// wait for the shot to clear
+			*/
+
+			nextStateCountdown = firingTime;
+			pulses = pulseCount;
+			state = Weapon.FiringState.Pulsing;
+			pulses --;
+			fire ();
+
 		} else if (state == Weapon.FiringState.Pulsing) {
 			laser.SetPosition (0, transform.parent.position);
 			laser.SetPosition (1, target.transform.position);
@@ -53,18 +57,12 @@ public class AlienScoutLaser : Weapon{
 		if (state == Weapon.FiringState.Pulsing) {
 			Destroy (laser);
 		}
-		state = Weapon.FiringState.Stopped;
+		base.ceaseFire ();
 	}
 
-	protected override void enableFiringArcs () {
-		setFiringArc (FiringArc.Top, true);
-	}
-
-	public override void showFiringArcs (){
-		setFiringArcVisibility (FiringArc.Top, true);
-	}
-
-	public override void hideFiringArcs () {
-		setFiringArcVisibility (FiringArc.Top, false);
+	protected override List<string> getFiringArcs () {
+		List<string> outList = new List<string> ();
+		outList.Add (FiringArc.TOP);
+		return outList;
 	}
 }

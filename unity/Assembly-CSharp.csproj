@@ -53,7 +53,6 @@
      <Compile Include="Assets\Scripts\Engines\AlienLightThruster.cs" />
      <Compile Include="Assets\Scripts\Engines\CruiserDefaultThruster.cs" />
      <Compile Include="Assets\Scripts\Engines\Thruster.cs" />
-     <Compile Include="Assets\Scripts\FiringArc.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\Interface\BuildBack.cs" />
      <Compile Include="Assets\Scripts\Interface\BuildButton.cs" />
@@ -67,6 +66,7 @@
      <Compile Include="Assets\Scripts\Util\Angle.cs" />
      <Compile Include="Assets\Scripts\Util\Targeting.cs" />
      <Compile Include="Assets\Scripts\Weapons\AlienScoutLaser.cs" />
+     <Compile Include="Assets\Scripts\Weapons\FiringArcHandler.cs" />
      <Compile Include="Assets\Scripts\Weapons\Weapon.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.2/UnityEngine.UI.dll</HintPath>
