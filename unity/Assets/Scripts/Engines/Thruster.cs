@@ -2,8 +2,10 @@
 using System.Collections;
 
 public class Thruster : MonoBehaviour {
+	public static float THRESHOLD = 0.05f;
+	public float thrusterAngle = 30;
 
-	private Vector3 destination;
+	private Vector2 destination;
 
 	private bool faceTargetOnly = false;
 	private bool rotateClockwise;
@@ -23,7 +25,19 @@ public class Thruster : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		// calculate the current angle adjustment required and distance to target
+
+		// if within thruster angle, apply force
+
+		// rotate to face the location
+
+		// if within critical distance, slow the ship down
+
+
+
+		/*
 		if (state == ThrusterState.Rotating) {
+			Debug.Log ("rotating");
 			if (targetRotation < 0) {
 				curRotation -= getRotationSpeed();
 				if (curRotation < targetRotation) {
@@ -49,16 +63,23 @@ public class Thruster : MonoBehaviour {
 			transform.parent.rotation = Quaternion.AngleAxis (curRotation + startingRotation, Vector3.forward);
 		} else if (state == ThrusterState.Thrusting) {
 			transform.parent.position = Vector2.MoveTowards(transform.parent.position, destination, getMovementSpeed());
-			if (transform.parent.position == destination) {
+			if (Vector2.Distance(new Vector2(transform.parent.position.x, transform.parent.position.y), new Vector2(destination.x, destination.y)) <= THRESHOLD) {
 				Debug.Log ("stopped moving");
 				state = ThrusterState.Stopped;
 			}
 
 		}
+		*/
 	}
 
 	public void startMove(Vector3 _destination, float rotationOffset) {
 		destination = _destination;
+		faceTargetOnly = false;
+		initalizeMove (rotationOffset);
+	}
+
+	public void keepDistance (Vector3 _destination, float rotationOffset, float _distance) {
+		destination = Targeting.LerpByDistance(_destination, transform.position, _distance);
 		faceTargetOnly = false;
 		initalizeMove (rotationOffset);
 	}

@@ -25,6 +25,11 @@ public class Targeting {
 		}
 		return outList;
 	}
+
+	public static Vector3 LerpByDistance(Vector3 to, Vector3 from, float dist) {
+		return dist * Vector3.Normalize(from - to) + to;
+	}
+
 }
 
 public class Faction{

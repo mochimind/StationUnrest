@@ -66,6 +66,13 @@ public class Ship : MonoBehaviour {
 		}
 	}
 
+	public void maintainDistance(Vector3 _location, float _dist) {
+		engine.GetComponent<Thruster> ().keepDistance (_location, rotationOffset, _dist);
+		foreach (Targeter t in watchers) {
+			t.handleTargetMove(_location);
+		}
+	}
+
 	public void looktAt(Vector3 location) {
 		engine.GetComponent<Thruster> ().startLook (location, rotationOffset);
 	}

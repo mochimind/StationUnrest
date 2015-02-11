@@ -5,10 +5,11 @@ public class AI : MonoBehaviour, Targeter {
 
 	protected GameObject target = null;
 	protected AIState state = AIState.acquiring;
-	public float targetMoveThreshold;
 	public float targetDistanceThreshold;
+	public float moveCalcDelay = 0.5f;
 
 	protected Vector2 targetPos;
+	protected float moveTimer = -1f;
 
 	protected enum AIState {
 		acquiring, pursuing, fleeing, stopped
@@ -26,12 +27,16 @@ public class AI : MonoBehaviour, Targeter {
 				state = AIState.stopped;
 			} else {
 				state = AIState.pursuing;
+				moveTimer = moveCalcDelay;
 			}
 		} else if (state == AIState.pursuing) {
 			// if the target has moved a certain amount, then recalibrate movement
-			if (Vector2.Distance(targetPos, target.transform.position)> targetMoveThreshold || 
-			    			Vector2.Distance (transform.position, target.transform.position) > targetDistanceThreshold) {
-				gameObject.GetComponent<Ship>().moveToCoords(target.transform.position);
+			if (moveTimer >= moveCalcDelay && Vector2.Distance(transform.position, target.transform.position) > targetDistanceThreshold) {
+				Debug.Log ("moving towards: " + target.transform.position);
+				moveTimer = 0f;
+				gameObject.GetComponent<Ship>().maintainDistance(target.transform.position, targetDistanceThreshold);
+			} else {
+				moveTimer += Time.deltaTime;
 			}
 		}
 	}
