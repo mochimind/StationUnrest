@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Thruster : MonoBehaviour {
 	public static float THRESHOLD = 0.05f;
-	public float thrusterAngle = 30;
 
 	private Vector2 destination;
 
@@ -25,19 +24,21 @@ public class Thruster : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		/* better approach, will implement later. Also, needed for force based movement
 		// calculate the current angle adjustment required and distance to target
-
+		Quaternion rotation = Quaternion.LookRotation(destination - transform.position);
+		if (rotation.eulerAngles.z < THRESHOLD) {
+			
+		}
+		
 		// if within thruster angle, apply force
-
+		
 		// rotate to face the location
+		transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * getRotationSpeed());
 
-		// if within critical distance, slow the ship down
+		*/
 
-
-
-		/*
 		if (state == ThrusterState.Rotating) {
-			Debug.Log ("rotating");
 			if (targetRotation < 0) {
 				curRotation -= getRotationSpeed();
 				if (curRotation < targetRotation) {
@@ -64,12 +65,10 @@ public class Thruster : MonoBehaviour {
 		} else if (state == ThrusterState.Thrusting) {
 			transform.parent.position = Vector2.MoveTowards(transform.parent.position, destination, getMovementSpeed());
 			if (Vector2.Distance(new Vector2(transform.parent.position.x, transform.parent.position.y), new Vector2(destination.x, destination.y)) <= THRESHOLD) {
-				Debug.Log ("stopped moving");
 				state = ThrusterState.Stopped;
 			}
 
 		}
-		*/
 	}
 
 	public void startMove(Vector3 _destination, float rotationOffset) {
