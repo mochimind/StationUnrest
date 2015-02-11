@@ -61,6 +61,8 @@
      <Compile Include="Assets\Scripts\Interface\BuildingView.cs" />
      <Compile Include="Assets\Scripts\Interface\ClosePopupPanel.cs" />
      <Compile Include="Assets\Scripts\Interface\MainGUIMgr.cs" />
+     <Compile Include="Assets\Scripts\Interface\WeaponGroup.cs" />
+     <Compile Include="Assets\Scripts\Interface\WeaponGroupButton.cs" />
      <Compile Include="Assets\Scripts\PlayerShip.cs" />
      <Compile Include="Assets\Scripts\PlayerShipMgr.cs" />
      <Compile Include="Assets\Scripts\Ship.cs" />
