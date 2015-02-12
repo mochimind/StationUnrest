@@ -7,7 +7,7 @@ public class ClickHandler : MonoBehaviour {
 	public float threshold = 0.1f;
 
 
-	private GameObject target = null;
+	private Clickable target = null;
 	private Vector2 moveDelta;
 	private bool isMoving;
 
@@ -31,24 +31,27 @@ public class ClickHandler : MonoBehaviour {
 				}
 				
 				// check if there's anything under the mouse button
-				RaycastHit2D[] hits = Physics2D.RaycastAll (Camera.main.ScreenToWorldPoint (Input.mousePosition), Vector2.zero); 
+				Vector3 mousePos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+				RaycastHit2D[] hits = Physics2D.RaycastAll (mousePos, Vector2.zero); 
 				foreach (RaycastHit2D hit in hits) {
 					if (hit.collider != null) {
-						// check if it's a ship
-						if (hit.collider.gameObject.tag == "Player" || hit.collider.gameObject.tag == "Alien") {
-							if (target != null) {
-								target.BroadcastMessage("unclicked", SendMessageOptions.DontRequireReceiver);
+						Clickable c = hit.collider.gameObject.GetComponent<Clickable>();
+						if (c == null) { continue; }
+						if (target != null) {
+							if (target.handleClick(hit.collider.gameObject, mousePos)) {
+								return;
+							} else {
+								target.loseClickFocus();
 							}
-							hit.collider.gameObject.BroadcastMessage ("clicked", SendMessageOptions.DontRequireReceiver);
-							target = hit.collider.gameObject;
-							return;
 						}
+						target = c;
+						target.clicked ();
+						return;
 					}
 				}
-
-				// at this point, we didn't find a ship under the button click
+				// three were no clickable items clicked on
 				if (target != null) {
-					target.BroadcastMessage ("offTargetClick", Camera.main.ScreenToWorldPoint (Input.mousePosition), SendMessageOptions.DontRequireReceiver);
+					target.handleClick(null, mousePos);
 				}
 			}
 		} else if (isMoving) {

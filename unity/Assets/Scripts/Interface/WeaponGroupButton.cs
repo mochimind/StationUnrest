@@ -4,22 +4,45 @@ using System.Collections;
 public class WeaponGroupButton : MonoBehaviour {
 
 	public int slotNumber;
+	private bool isActive;
 
 	private WeaponGroupListener handler;
 
 	void Start () {
-		gameObject.SetActive(false);
+		disable();
 	}
 
-	public void activate() { gameObject.SetActive(true); }
+	public void enable(WeaponGroupListener _handler) { 
+		gameObject.SetActive(true);
+		handler = _handler;
+		activate();
+	}
 
-	public void deactivate() { gameObject.SetActive(false); }
+	public void disable() { 
+		gameObject.SetActive(false);
+		isActive = false;
+	}
+
+	public void activate() {
+		isActive = true;
+	}
+
+	public void deactivate() {
+		isActive = false;
+	}
 	
 	public interface WeaponGroupListener {
-		void WGClicked(int id);
+		void WGActivated(int id);
+		void WGDeactivated(int id);
 	}
 
 	void OnMouseUp() {
-		handler.WGClicked(slotNumber);
+		if (isActive) {
+			deactivate();
+			handler.WGDeactivated(slotNumber);
+		} else {
+			activate();
+			handler.WGActivated(slotNumber);
+		}
 	}
 }

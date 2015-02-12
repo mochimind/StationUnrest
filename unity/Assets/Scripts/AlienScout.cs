@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AlienScout : MonoBehaviour {
+public class AlienScout : Clickable {
 
-	private GameObject target = null;
 	public float rotationOffset;
 
 	private LineRenderer laser;

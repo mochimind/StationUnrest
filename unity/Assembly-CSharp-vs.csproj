@@ -51,6 +51,7 @@
      <Compile Include="Assets\Scripts\AlienScout.cs" />
      <Compile Include="Assets\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\ClickHandler.cs" />
+     <Compile Include="Assets\Scripts\Clickable.cs" />
      <Compile Include="Assets\Scripts\Engines\AlienLightThruster.cs" />
      <Compile Include="Assets\Scripts\Engines\CruiserDefaultThruster.cs" />
      <Compile Include="Assets\Scripts\Engines\Thruster.cs" />

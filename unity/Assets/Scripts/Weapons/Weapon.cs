@@ -22,8 +22,7 @@ public class Weapon : MonoBehaviour, Targeter, FiringArcHandler.TargetingArcList
 	protected int pulses;
 	protected float nextStateCountdown = 0f;
 	protected bool hasFiringSolution = false;
-	private bool targetMovingOutOfRange = false;
-	
+
 
 	protected enum FiringState {
 		GunCooldown, PulseCooldown, Pulsing, Ready, Stopped

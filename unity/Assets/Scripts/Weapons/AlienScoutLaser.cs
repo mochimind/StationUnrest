@@ -22,7 +22,7 @@ public class AlienScoutLaser : Weapon{
 			fire ();
 
 		} else if (state == Weapon.FiringState.Pulsing) {
-			laser.SetPosition (0, transform.parent.position);
+			laser.SetPosition (0, transform.position);
 			laser.SetPosition (1, target.transform.position);
 			if (nextStateCountdown <= 0f) {
 				Destroy (laser);
