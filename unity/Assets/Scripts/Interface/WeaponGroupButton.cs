@@ -6,6 +6,9 @@ public class WeaponGroupButton : MonoBehaviour {
 	public int slotNumber;
 	private bool isActive;
 
+	public Texture enableTexture;
+	public Texture disableTexture;
+
 	private WeaponGroupListener handler;
 
 	void Start () {
@@ -15,7 +18,7 @@ public class WeaponGroupButton : MonoBehaviour {
 	public void enable(WeaponGroupListener _handler) { 
 		gameObject.SetActive(true);
 		handler = _handler;
-		activate();
+		deactivate();
 	}
 
 	public void disable() { 
@@ -25,10 +28,12 @@ public class WeaponGroupButton : MonoBehaviour {
 
 	public void activate() {
 		isActive = true;
+		gameObject.GetComponent<GUITexture> ().texture = enableTexture;
 	}
 
 	public void deactivate() {
 		isActive = false;
+		gameObject.GetComponent<GUITexture> ().texture = disableTexture;
 	}
 	
 	public interface WeaponGroupListener {
