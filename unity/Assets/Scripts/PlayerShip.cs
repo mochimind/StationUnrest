@@ -14,6 +14,7 @@ public class PlayerShip : Clickable, WeaponGroupButton.WeaponGroupListener {
 
 		equip = (GameObject)Instantiate (Resources.Load ("ShipModules/Weapons/AlienScoutLaser"));
 		equip.transform.parent = transform;
+		equip.GetComponent<Weapon> ().setFiringArc (true, false, false, false);
 		gameObject.GetComponent<Ship> ().weapons.Add (equip);
 
 		weaponGroup[0] = new List<GameObject>();
