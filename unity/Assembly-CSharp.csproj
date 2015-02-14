@@ -52,6 +52,7 @@
      <Compile Include="Assets\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\ClickHandler.cs" />
      <Compile Include="Assets\Scripts\Clickable.cs" />
+     <Compile Include="Assets\Scripts\Destructable.cs" />
      <Compile Include="Assets\Scripts\Engines\AlienLightThruster.cs" />
      <Compile Include="Assets\Scripts\Engines\CruiserDefaultThruster.cs" />
      <Compile Include="Assets\Scripts\Engines\Thruster.cs" />
@@ -67,6 +68,7 @@
      <Compile Include="Assets\Scripts\PlayerShip.cs" />
      <Compile Include="Assets\Scripts\PlayerShipMgr.cs" />
      <Compile Include="Assets\Scripts\Ship.cs" />
+     <Compile Include="Assets\Scripts\Targetable.cs" />
      <Compile Include="Assets\Scripts\Util\Angle.cs" />
      <Compile Include="Assets\Scripts\Util\Targeting.cs" />
      <Compile Include="Assets\Scripts\Weapons\Artillery.cs" />

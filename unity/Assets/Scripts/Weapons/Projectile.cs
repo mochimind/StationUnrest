@@ -1,15 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Projectile : MonoBehaviour {
+public class Projectile : Destructable {
+	void OnTriggerEnter2D(Collider2D collision) {
 
-	// Use this for initialization
-	void Start () {
-	
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	public void setTarget() {
+
 	}
 }

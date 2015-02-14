@@ -2,13 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Ship : MonoBehaviour {
-
-	public int maxHealth;
-	public int curHealth;
+public class Ship : Targetable {
 	public float rotationOffset;
 	public int size;
-	public List<Targeter> watchers  = new List<Targeter> ();
 
 	public List<GameObject> weapons = new List<GameObject> ();
 	public GameObject engine;
@@ -23,28 +19,6 @@ public class Ship : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-	}
-
-	public float getPercentHealth() {
-		return (float)curHealth / maxHealth;
-	}
-
-	public void handleTarget(Targeter t) {
-		watchers.Add (t);
-	}
-
-	public void handleStopTarget(Targeter t) {
-		watchers.Remove (t);
-	}
-
-	public void handleDamage(int damage) {
-		curHealth -= damage;
-		if (curHealth <= 0) {
-			foreach (Targeter t in watchers) {
-				t.handleTargetDeath();
-			}
-			Destroy (this.gameObject);
-		}
 	}
 
 	public void handleClick() {

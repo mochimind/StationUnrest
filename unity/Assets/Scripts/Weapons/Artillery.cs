@@ -5,6 +5,7 @@ public class Artillery : Weapon {
 	public GameObject ammo;
 
 	protected override void startFire() {
-		target.GetComponent<Ship> ().handleDamage (damage);
+		GameObject shot = (GameObject) Instantiate (ammo);
+
 	}
 }

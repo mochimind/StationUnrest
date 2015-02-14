@@ -70,7 +70,7 @@ public class Weapon : MonoBehaviour, Targeter, FiringArcHandler.TargetingArcList
 			target.GetComponent<Ship> ().handleStopTarget (this);
 		}
 		target = _target;
-		target.GetComponent<Ship> ().handleTarget (this);
+		target.GetComponent<Targetable> ().handleTarget (this);
 		foreach (string token in firingArcs) {
 			transform.FindChild(token).GetComponent<FiringArcHandler>().setTarget(target, this);
 		}
