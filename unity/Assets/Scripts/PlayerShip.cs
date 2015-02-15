@@ -12,9 +12,9 @@ public class PlayerShip : Clickable, WeaponGroupButton.WeaponGroupListener {
 		equip.transform.parent = transform;
 		gameObject.GetComponent<Ship> ().engine = equip;
 
-		equip = (GameObject)Instantiate (Resources.Load ("ShipModules/Weapons/AlienScoutLaser"));
+		equip = (GameObject)Instantiate (Resources.Load ("ShipModules/Weapons/120mm Artillery"));
 		equip.transform.parent = transform;
-		equip.GetComponent<Weapon> ().setFiringArc (true, false, false, false);
+		equip.GetComponent<Weapon> ().setFiringArc (true, true, true, true);
 		gameObject.GetComponent<Ship> ().weapons.Add (equip);
 
 		weaponGroup[0] = new List<GameObject>();
@@ -46,6 +46,7 @@ public class PlayerShip : Clickable, WeaponGroupButton.WeaponGroupListener {
 			if (weaponGroupStatus[i]) {
 				foreach (GameObject token in weaponGroup[i]) {
 					token.GetComponent<Weapon>().setTarget(newObj);
+					token.GetComponent<Weapon>().hideFiringArcs();
 				}
 			}
 		}

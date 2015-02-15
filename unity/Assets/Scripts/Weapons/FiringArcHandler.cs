@@ -12,13 +12,10 @@ public class FiringArcHandler : MonoBehaviour {
 	}
 
 	void Start() {
-		Debug.Log ("this default value is bad");
-		//gameObject.GetComponent<Collider2D>().enabled = false;
 		gameObject.GetComponent<SpriteRenderer>().enabled = false;
 	}
 
 	public void setTarget(GameObject _target, TargetingArcListener _listener) {
-		Debug.Log ("enabling collider");
 		listener = _listener;
 		target = _target;
 

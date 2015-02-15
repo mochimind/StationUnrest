@@ -6,6 +6,6 @@ public class Artillery : Weapon {
 
 	protected override void startFire() {
 		GameObject shot = (GameObject) Instantiate (ammo);
-
+		shot.GetComponent<Projectile> ().setTarget (target, transform.parent.gameObject);
 	}
 }

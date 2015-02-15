@@ -46,9 +46,7 @@ public class Weapon : MonoBehaviour, Targeter, FiringArcHandler.TargetingArcList
 	
 	// Update is called once per frame
 	void Update () {
-		if (state != FiringState.Stopped) {
-			processFire();
-		}
+		processFire();
 	}
 	
 	void Targeter.handleTargetDeath() {
@@ -76,21 +74,26 @@ public class Weapon : MonoBehaviour, Targeter, FiringArcHandler.TargetingArcList
 		}
 	}
 
-	public virtual void ceaseFire () { state = FiringState.Stopped; }
+	public virtual void ceaseFire () {
+		// reset the pulse. note, the assumption is that the firing delay is longer than the pluse delay
+		if (state == FiringState.Pulsing) {
+			nextStateCountdown = firingDelay;
+		}
+		state = FiringState.Stopped; 
+	}
 
 	protected virtual void processFire() {
 		nextStateCountdown -= Time.deltaTime ;
-		if (state == Weapon.FiringState.Ready || (state == Weapon.FiringState.GunCooldown && nextStateCountdown <= 0f)) {
+		if ((state == Weapon.FiringState.Ready || state == Weapon.FiringState.GunCooldown) && nextStateCountdown <= 0f) {
 			nextStateCountdown = firingTime;
 			pulses = pulseCount;
 			state = Weapon.FiringState.Pulsing;
 			pulses --;
-			startFire ();
-			
+			startFire ();			
 		} else if (state == Weapon.FiringState.Pulsing) {
-			updateFire();
+			updateFire ();
 			if (nextStateCountdown <= 0f) {
-				completeFire();
+				completeFire ();
 				if (pulses > 0) {
 					state = Weapon.FiringState.PulseCooldown;
 					nextStateCountdown = pulseDelay;
