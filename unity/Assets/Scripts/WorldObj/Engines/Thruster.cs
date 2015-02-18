@@ -40,7 +40,7 @@ public class Thruster : MonoBehaviour {
 		transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotationSpeed);
 
 		*/
-
+		Debug.Log ("State is " + state);
 		if (state == ThrusterState.Rotating) {
 			if (targetRotation < 0) {
 				curRotation -= rotationSpeed;
@@ -67,7 +67,9 @@ public class Thruster : MonoBehaviour {
 			transform.parent.rotation = Quaternion.AngleAxis (curRotation + startingRotation, Vector3.forward);
 		} else if (state == ThrusterState.Thrusting) {
 			transform.parent.position = Vector2.MoveTowards(transform.parent.position, destination, movementSpeed);
+			Debug.Log ("moving towards" + transform.parent.position + destination + "||" + movementSpeed);
 			if (Vector2.Distance(new Vector2(transform.parent.position.x, transform.parent.position.y), new Vector2(destination.x, destination.y)) <= THRESHOLD) {
+				Debug.Log ("stopped");
 				state = ThrusterState.Stopped;
 			}
 
@@ -96,7 +98,7 @@ public class Thruster : MonoBehaviour {
 		curRotation = 0f;
 		if (Mathf.Abs (targetRotation) < 3) {
 			// know when to stop
-			state = ThrusterState.Stopped;
+			state = ThrusterState.Thrusting;
 		}
 	}
 

@@ -32,7 +32,6 @@ public class AI : MonoBehaviour, Targeter {
 		} else if (state == AIState.pursuing) {
 			// if the target has moved a certain amount, then recalibrate movement
 			if (moveTimer >= moveCalcDelay && Vector2.Distance(transform.position, target.transform.position) > targetDistanceThreshold) {
-				Debug.Log ("stuff: " + target);
 				moveTimer = 0f;
 				gameObject.GetComponent<Propelled>().maintainDistance(target.transform.position, targetDistanceThreshold);
 			} else {
