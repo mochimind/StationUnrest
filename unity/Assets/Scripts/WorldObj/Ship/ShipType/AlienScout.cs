@@ -15,11 +15,6 @@ public class AlienScout : Clickable {
 		equip.transform.parent = transform;
 		equip.GetComponent<Weapon> ().setFiringArc (true, false, false, false);
 		gameObject.GetComponent<Ship> ().weapons.Add (equip);
-
-		equip = (GameObject) Instantiate (Resources.Load ("ShipModules/Engines/AlienLightThruster"));
-		equip.transform.position = transform.position;
-		equip.transform.parent = transform;
-		gameObject.GetComponent<Propelled> ().engine = equip;
 	}
 	
 	// Update is called once per frame

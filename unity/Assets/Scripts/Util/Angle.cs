@@ -2,6 +2,7 @@
 
 public class Angle {
 	public static float RotationAngle(Transform baseObj, Vector3 targetCoords, float rotationalOffset) {
+		Debug.Log ("we got: " + baseObj + targetCoords + rotationalOffset);
 		// what's the rotational angle required to rotate base to face target
 		Vector3 dir = targetCoords - baseObj.position;
 		float targetRotation = Mathf.Atan2(dir.y,dir.x) * Mathf.Rad2Deg + rotationalOffset;

@@ -8,11 +8,7 @@ public class PlayerShip : Clickable, WeaponGroupButton.WeaponGroupListener {
 
 	// Use this for initialization
 	void Start () {
-		GameObject equip = (GameObject) Instantiate (Resources.Load ("ShipModules/Engines/CruiserDefaultThruster"));
-		equip.transform.parent = transform;
-		gameObject.GetComponent<Propelled> ().engine = equip;
-
-		equip = (GameObject)Instantiate (Resources.Load ("ShipModules/Weapons/120mm Artillery"));
+		GameObject equip = (GameObject)Instantiate (Resources.Load ("ShipModules/Weapons/RageFireLauncher"));
 		equip.transform.parent = transform;
 		equip.GetComponent<Weapon> ().setFiringArc (true, true, true, true);
 		gameObject.GetComponent<Ship> ().weapons.Add (equip);

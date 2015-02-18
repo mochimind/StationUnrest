@@ -2,9 +2,22 @@
 using System.Collections;
 
 public class Propelled : MonoBehaviour {
-	public GameObject engine;
+	public GameObject equipment;
+	private GameObject engine;
 
 	public float rotationOffset;
+
+	void Start() {
+		if (equipment != null) {
+			equip(equipment);
+		}
+	}
+
+	public void equip(GameObject _engine) {
+		engine = (GameObject) Instantiate(equipment);
+		engine.transform.position = transform.position;
+		engine.transform.parent = transform;
+	}
 
 	public void moveToCoords(Vector3 mousePos) {
 		engine.GetComponent<Thruster> ().startMove (mousePos, rotationOffset);

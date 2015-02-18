@@ -4,6 +4,9 @@ using System.Collections;
 public class Thruster : MonoBehaviour {
 	public static float THRESHOLD = 0.05f;
 
+	public float rotationSpeed;
+	public float movementSpeed;
+
 	private Vector2 destination;
 
 	private bool faceTargetOnly = false;
@@ -34,13 +37,13 @@ public class Thruster : MonoBehaviour {
 		// if within thruster angle, apply force
 		
 		// rotate to face the location
-		transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * getRotationSpeed());
+		transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotationSpeed);
 
 		*/
 
 		if (state == ThrusterState.Rotating) {
 			if (targetRotation < 0) {
-				curRotation -= getRotationSpeed();
+				curRotation -= rotationSpeed;
 				if (curRotation < targetRotation) {
 					curRotation = targetRotation;
 					if (faceTargetOnly) {
@@ -50,7 +53,7 @@ public class Thruster : MonoBehaviour {
 					}
 				}
 			} else {
-				curRotation += getRotationSpeed();
+				curRotation += rotationSpeed;
 				if (curRotation > targetRotation) {
 					curRotation = targetRotation;
 					if (faceTargetOnly) {
@@ -63,7 +66,7 @@ public class Thruster : MonoBehaviour {
 
 			transform.parent.rotation = Quaternion.AngleAxis (curRotation + startingRotation, Vector3.forward);
 		} else if (state == ThrusterState.Thrusting) {
-			transform.parent.position = Vector2.MoveTowards(transform.parent.position, destination, getMovementSpeed());
+			transform.parent.position = Vector2.MoveTowards(transform.parent.position, destination, movementSpeed);
 			if (Vector2.Distance(new Vector2(transform.parent.position.x, transform.parent.position.y), new Vector2(destination.x, destination.y)) <= THRESHOLD) {
 				state = ThrusterState.Stopped;
 			}
@@ -105,13 +108,5 @@ public class Thruster : MonoBehaviour {
 
 	public void stopMove() {
 		state = ThrusterState.Stopped;
-	}
-
-	public virtual float getRotationSpeed() {
-		return 0f;
-	}
-
-	public virtual float getMovementSpeed() {
-		return 0f;
 	}
 }

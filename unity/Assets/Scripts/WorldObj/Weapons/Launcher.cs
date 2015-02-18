@@ -1,15 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Launcher : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
+public class Launcher : Weapon {
+	public GameObject ammo;
 	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+	protected override void startFire() {
+		GameObject shot = (GameObject) Instantiate (ammo);
+		shot.GetComponent<Missile>().initialize(transform.parent.gameObject);
+		shot.GetComponent<MissileAI> ().setTarget(target);
 	}
 }

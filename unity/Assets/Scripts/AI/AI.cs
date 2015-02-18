@@ -12,7 +12,7 @@ public class AI : MonoBehaviour, Targeter {
 	protected float moveTimer = -1f;
 
 	protected enum AIState {
-		acquiring, pursuing, fleeing, stopped
+		acquiring, pursuing, working, fleeing, stopped
 	}
 
 	// Use this for initialization
@@ -32,6 +32,7 @@ public class AI : MonoBehaviour, Targeter {
 		} else if (state == AIState.pursuing) {
 			// if the target has moved a certain amount, then recalibrate movement
 			if (moveTimer >= moveCalcDelay && Vector2.Distance(transform.position, target.transform.position) > targetDistanceThreshold) {
+				Debug.Log ("stuff: " + target);
 				moveTimer = 0f;
 				gameObject.GetComponent<Propelled>().maintainDistance(target.transform.position, targetDistanceThreshold);
 			} else {
@@ -40,8 +41,18 @@ public class AI : MonoBehaviour, Targeter {
 		}
 	}
 
-	void Targeter.handleTargetDeath() { state = AIState.acquiring; }
+	void Targeter.handleTargetDeath() { onTargetDeath(); }
 	void Targeter.handleTargetMove(Vector3 pos) { }
+
+	protected virtual void onTargetDeath() {
+		state = AIState.acquiring;
+	}
+
+	public void setTarget(GameObject _target) {
+		target = _target;
+		state = AIState.pursuing;
+		moveTimer = moveCalcDelay;
+	}
 
 	protected virtual bool acquireTarget() {
 		if (target == null) {

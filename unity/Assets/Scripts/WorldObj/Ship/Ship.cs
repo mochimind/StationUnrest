@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Ship : Targetable {
-	public float rotationOffset;
 	public int size;
 
 	public List<GameObject> weapons = new List<GameObject> ();

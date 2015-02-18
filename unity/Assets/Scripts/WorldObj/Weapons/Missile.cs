@@ -1,15 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Missile : MonoBehaviour {
+public class Missile : Destructable {
+	public int damage;
+	private GameObject parent;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+	public void initialize(GameObject _parent) { parent = _parent; }
+
+	void OnTriggerEnter2D(Collider2D collision) {
+		Destructable d = collision.gameObject.GetComponent<Destructable> ();
+		if (d!= null && collision.gameObject != parent) {
+			d.handleDamage(damage);
+			onDeath();
+		}
 	}
 }
