@@ -33,7 +33,7 @@ public class AI : MonoBehaviour, Targeter {
 			// if the target has moved a certain amount, then recalibrate movement
 			if (moveTimer >= moveCalcDelay && Vector2.Distance(transform.position, target.transform.position) > targetDistanceThreshold) {
 				moveTimer = 0f;
-				gameObject.GetComponent<Ship>().maintainDistance(target.transform.position, targetDistanceThreshold);
+				gameObject.GetComponent<Propelled>().maintainDistance(target.transform.position, targetDistanceThreshold);
 			} else {
 				moveTimer += Time.deltaTime;
 			}

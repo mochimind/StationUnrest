@@ -66,6 +66,7 @@
      <Compile Include="Assets\Scripts\Util\Targeting.cs" />
      <Compile Include="Assets\Scripts\WorldObj\Engines\AlienLightThruster.cs" />
      <Compile Include="Assets\Scripts\WorldObj\Engines\CruiserDefaultThruster.cs" />
+     <Compile Include="Assets\Scripts\WorldObj\Engines\Propelled.cs" />
      <Compile Include="Assets\Scripts\WorldObj\Engines\Thruster.cs" />
      <Compile Include="Assets\Scripts\WorldObj\Ship\PlayerShipMgr.cs" />
      <Compile Include="Assets\Scripts\WorldObj\Ship\Ship.cs" />

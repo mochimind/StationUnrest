@@ -10,7 +10,7 @@ public class PlayerShip : Clickable, WeaponGroupButton.WeaponGroupListener {
 	void Start () {
 		GameObject equip = (GameObject) Instantiate (Resources.Load ("ShipModules/Engines/CruiserDefaultThruster"));
 		equip.transform.parent = transform;
-		gameObject.GetComponent<Ship> ().engine = equip;
+		gameObject.GetComponent<Propelled> ().engine = equip;
 
 		equip = (GameObject)Instantiate (Resources.Load ("ShipModules/Weapons/120mm Artillery"));
 		equip.transform.parent = transform;
@@ -34,7 +34,7 @@ public class PlayerShip : Clickable, WeaponGroupButton.WeaponGroupListener {
 	public override bool handleClick (GameObject newObj, Vector3 mousePos) {
 		if (newObj == null) {
 			// moving there
-			gameObject.GetComponent<Ship> ().moveToCoords (mousePos);
+			gameObject.GetComponent<Propelled> ().moveToCoords (mousePos);
 			return true;
 		}
 
