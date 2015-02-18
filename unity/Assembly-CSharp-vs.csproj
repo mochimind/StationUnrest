@@ -48,14 +48,10 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\AI\AI.cs" />
      <Compile Include="Assets\Scripts\AI\FrontFireAttack.cs" />
-     <Compile Include="Assets\Scripts\AlienScout.cs" />
      <Compile Include="Assets\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\ClickHandler.cs" />
      <Compile Include="Assets\Scripts\Clickable.cs" />
      <Compile Include="Assets\Scripts\Destructable.cs" />
-     <Compile Include="Assets\Scripts\Engines\AlienLightThruster.cs" />
-     <Compile Include="Assets\Scripts\Engines\CruiserDefaultThruster.cs" />
-     <Compile Include="Assets\Scripts\Engines\Thruster.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\Interface\BuildBack.cs" />
      <Compile Include="Assets\Scripts\Interface\BuildButton.cs" />
@@ -65,19 +61,23 @@
      <Compile Include="Assets\Scripts\Interface\MainGUIMgr.cs" />
      <Compile Include="Assets\Scripts\Interface\WeaponGroup.cs" />
      <Compile Include="Assets\Scripts\Interface\WeaponGroupButton.cs" />
-     <Compile Include="Assets\Scripts\PlayerShip.cs" />
-     <Compile Include="Assets\Scripts\PlayerShipMgr.cs" />
-     <Compile Include="Assets\Scripts\Ship.cs" />
      <Compile Include="Assets\Scripts\Targetable.cs" />
      <Compile Include="Assets\Scripts\Util\Angle.cs" />
      <Compile Include="Assets\Scripts\Util\Targeting.cs" />
-     <Compile Include="Assets\Scripts\Weapons\Artillery.cs" />
-     <Compile Include="Assets\Scripts\Weapons\FiringArcHandler.cs" />
-     <Compile Include="Assets\Scripts\Weapons\Laser.cs" />
-     <Compile Include="Assets\Scripts\Weapons\Launcher.cs" />
-     <Compile Include="Assets\Scripts\Weapons\Missile.cs" />
-     <Compile Include="Assets\Scripts\Weapons\Projectile.cs" />
-     <Compile Include="Assets\Scripts\Weapons\Weapon.cs" />
+     <Compile Include="Assets\Scripts\WorldObj\Engines\AlienLightThruster.cs" />
+     <Compile Include="Assets\Scripts\WorldObj\Engines\CruiserDefaultThruster.cs" />
+     <Compile Include="Assets\Scripts\WorldObj\Engines\Thruster.cs" />
+     <Compile Include="Assets\Scripts\WorldObj\Ship\PlayerShipMgr.cs" />
+     <Compile Include="Assets\Scripts\WorldObj\Ship\Ship.cs" />
+     <Compile Include="Assets\Scripts\WorldObj\Ship\ShipType\AlienScout.cs" />
+     <Compile Include="Assets\Scripts\WorldObj\Ship\ShipType\PlayerShip.cs" />
+     <Compile Include="Assets\Scripts\WorldObj\Weapons\Artillery.cs" />
+     <Compile Include="Assets\Scripts\WorldObj\Weapons\FiringArcHandler.cs" />
+     <Compile Include="Assets\Scripts\WorldObj\Weapons\Laser.cs" />
+     <Compile Include="Assets\Scripts\WorldObj\Weapons\Launcher.cs" />
+     <Compile Include="Assets\Scripts\WorldObj\Weapons\Missile.cs" />
+     <Compile Include="Assets\Scripts\WorldObj\Weapons\Projectile.cs" />
+     <Compile Include="Assets\Scripts\WorldObj\Weapons\Weapon.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.2/UnityEngine.UI.dll</HintPath>
  </Reference>

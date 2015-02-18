@@ -1,16 +1,11 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Weapons\Projectile.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Weapons\Weapon.cs">
     <Files>
-      <File FileName="Assets\Scripts\Weapons\Artillery.cs" Line="9" Column="1" />
-      <File FileName="Assets\Scripts\Weapons\Weapon.cs" Line="73" Column="33" />
-      <File FileName="Assets\Scripts\Weapons\Projectile.cs" Line="28" Column="1" />
-      <File FileName="Assets\Scripts\Destructable.cs" Line="15" Column="14" />
-      <File FileName="Assets\Scripts\Ship.cs" Line="5" Column="31" />
-      <File FileName="Assets\Scripts\AI\AI.cs" Line="59" Column="1" />
-      <File FileName="Assets\Scripts\Targetable.cs" Line="18" Column="3" />
-      <File FileName="Assets\Scripts\AI\FrontFireAttack.cs" Line="7" Column="33" />
-      <File FileName="Assets\Scripts\Engines\Thruster.cs" Line="88" Column="23" />
+      <File FileName="Assets\Scripts\Weapons\Weapon.cs" Line="87" Column="1" />
+      <File FileName="Assets\Scripts\PlayerShip.cs" Line="57" Column="7" />
+      <File FileName="Assets\Scripts\Weapons\FiringArcHandler.cs" Line="29" Column="1" />
+      <File FileName="Assets\Scripts\AlienScout.cs" Line="30" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
